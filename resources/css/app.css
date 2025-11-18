@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset dan normalisasi layout dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    
+    
+    overflow-x: hidden; /* Hapus scroll horizontal */
+    background-color: #f3f4f6;
+    color: #155724;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    @apply bg-green-600 shadow-md p-4 flex justify-between items-center;
+}
+
+/* Logo */
+.logo {
+    @apply text-white text-xl font-bold;
+}
+
+/* Navigasi */
+.nav-menu {
+    @apply flex gap-6;
+}
+
+.nav-link {
+    @apply text-white no-underline font-medium transition-colors duration-200;
+}
+
+.nav-link:hover {
+    @apply text-green-100;
+}
+
+/* Footer */
+.footer {
+    @apply bg-green-600 text-white text-center py-4 mt-8;
+}
