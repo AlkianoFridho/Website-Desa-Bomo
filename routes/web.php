@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfilDesaController;
 use App\Http\Controllers\InformasiPublikController;
 use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\BantuanController;
 
 Route::get('/', function () {
     return view('user.home');
@@ -16,6 +17,8 @@ Route::get('/informasi-publik', [InformasiPublikController::class, 'showUserView
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
 Route::get('/pengaduan', [PengaduanController::class, 'showUserView'])->name('pengaduan');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::get('/bantuan', [BantuanController::class, 'index'])->name('user.bantuan');
+
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -38,3 +41,6 @@ Route::resource('admin/organisasi', OrganisasiController::class);
 // 📌 Pengaduan
 Route::resource('admin/pengaduan', PengaduanController::class)->only(['index', 'edit', 'update']);
 require __DIR__.'/auth.php';
+
+// 📌 Bantuan
+
