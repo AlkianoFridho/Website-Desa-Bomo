@@ -12,7 +12,7 @@
                     <h3 class="text-lg font-semibold mb-4">Struktur Organisasi</h3>
 
                     <!-- Create -->
-                    <a href="{{ route('organisasi.create') }}" 
+                    <a href="{{ route('admin.organisasi.create') }}" 
                        class="px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
                         ➕ Tambah Pejabat
                     </a>
