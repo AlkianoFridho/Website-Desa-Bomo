@@ -12,17 +12,19 @@
                     <h3 class="text-lg font-semibold">Profil Desa</h3>
                     
                     @if ($profildesa)
-                        <p><strong>Nama Desa:</strong> {{ $profildesa->nama_desa }}</p>
-                        <p><strong>Visi & Misi:</strong> {{ $profildesa->visi_misi }}</p>
-                        <p><strong>Kepala Desa:</strong> {{ $profildesa->kepala_desa }}</p>
-                        <p><strong>Geografis:</strong> {{ $profildesa->geografis }}</p>
-                        <p><strong>Demografi:</strong> {{ $profildesa->demografi }}</p>
+    <p><strong>Nama Desa:</strong> {{ $profildesa->nama_desa }}</p>
+    <p><strong>Visi:</strong> {{ $profildesa->visi }}</p>
+    <p><strong>Misi:</strong> {{ $profildesa->misi }}</p>
+    <p><strong>Kepala Desa:</strong> {{ $profildesa->kepala_desa }}</p>
+    <p><strong>Lokasi:</strong> {{ $profildesa->lokasi }}</p>
+    <p><strong>Deskripsi:</strong> {{ $profildesa->deskripsi }}</p>
 
-                        <a href="{{ route('profil-desa.edit', $profildesa->id) }}" class="btn btn-warning mt-4">Edit</a>
-                    @else
-                        <p>Belum ada data profil desa.</p>
-                        <a href="{{ route('profil-desa.create') }}" class="btn btn-primary mt-4">Tambah Profil Desa</a>
-                    @endif
+    <a href="{{ route('admin.profil-desa.edit', $profildesa->id) }}" class="btn btn-warning mt-4">Edit</a>
+@else
+    <p>Belum ada data profil desa.</p>
+    <a href="{{ route('admin.profil-desa.create') }}" class="btn btn-primary mt-4">Tambah Profil Desa</a>
+@endif
+
                 </div>
             </div>
         </div>
