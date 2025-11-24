@@ -14,7 +14,7 @@
             
             <div class="illustration-wrapper">
                 {{-- Gunakan fungsi asset() Laravel untuk memuat gambar --}}
-                <img src="{{ asset('assets/images/kakek.png') }}" alt="Ilustrasi seorang kakek melambai" class="illustration-img">
+                <img src="{{ asset('assets/onboarding/oldman 1.png') }}" alt="Ilustrasi seorang kakek melambai" class="illustration-img">
             </div>
 
             <p class="description">
