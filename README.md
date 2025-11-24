@@ -1,3 +1,25 @@
+Nama Aplikasi :
+Sistem Informasi Desa Bomo
+
+Deskripsi Aplikasi :
+Sistem Informasi Desa Bomo adalah platform digital yang dirancang untuk mempermudah akses informasi, layanan administrasi, dan transparansi data desa. Aplikasi ini menyediakan fitur seperti berita desa, informasi keuangan desa, data kependudukan, agenda kegiatan, dan layanan aduan masyarakat.
+Tujuan utama aplikasi ini adalah membantu desa dalam proses digitalisasi, meningkatkan partisipasi warga, dan menyediakan layanan publik yang cepat serta mudah diakses.
+
+Anggota :
+1. Rekayasa Interaksi D - 202210370311255 - Mochammad Rifqi Yaafi - @RifqiYaafi
+2. Rekayasa Interaksi D - 202210370311316 - Alkiano Fridho Aji Mahadiva - @AlkianoFridho
+3. Rekayasa Interaksi D - 202210370311318 - Bardata Aji Prastowo - @Baraji
+4. Rekayasa Interaksi D - 202210370311321 - Muhammad Ihsanuddin S - @IhsanSaputra
+5. Rekayasa Interaksi D - 202210370311344 - M.Liedle Putra N - @Liedle
+
+Link Figma :
+https://www.figma.com/design/FIpx9UXtTa409Is6qTUAZL/Rekayasa-Interaksi?node-id=31-178&t=PnMvExIt7SQQZSNg-1
+
+Worksheet :
+
+Low Fidelity Prototype : 
+
+<img width="478" height="433" alt="image" src="https://github.com/user-attachments/assets/d95d9340-e4ca-4b11-aad6-033425f72082" />
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
