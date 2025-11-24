@@ -16,20 +16,24 @@
                     </x-nav-link>
 
                     @if(Auth::user()->role === 'admin') 
-                        <x-nav-link :href="route('profil-desa.index')" :active="request()->routeIs('profil-desa.*')">
+                        <x-nav-link :href="route('admin.profil-desa.index')" :active="request()->routeIs('profil-desa.*')">
                             {{ __('Profil Desa') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('informasi-publik.index')" :active="request()->routeIs('informasi-publik.*')">
+                        <x-nav-link :href="route('admin.informasi-publik.index')" :active="request()->routeIs('informasi-publik.*')">
                             {{ __('Informasi Publik') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('organisasi.index')" :active="request()->routeIs('organisasi.*')">
+                        <x-nav-link :href="route('admin.organisasi.index')" :active="request()->routeIs('organisasi.*')">
                             {{ __('Struktur Organisasi') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('pengaduan.index')" :active="request()->routeIs('pengaduan.*')">
+                        <x-nav-link :href="route('admin.pengaduan.index')" :active="request()->routeIs('pengaduan.*')">
                             {{ __('Pengaduan') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.panduan.index')" :active="request()->routeIs('panduan.*')">
+                            {{ __('Panduan') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -89,20 +93,24 @@
             </x-responsive-nav-link>
 
             @if(Auth::user()->role === 'admin')
-                <x-responsive-nav-link :href="route('profil-desa.index')" :active="request()->routeIs('profil-desa.*')">
+                <x-responsive-nav-link :href="route('admin.profil-desa.index')" :active="request()->routeIs('profil-desa.*')">
                     {{ __('Profil Desa') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('informasi-publik.index')" :active="request()->routeIs('informasi-publik.*')">
+                <x-responsive-nav-link :href="route('admin.informasi-publik.index')" :active="request()->routeIs('informasi-publik.*')">
                     {{ __('Informasi Publik') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('organisasi.index')" :active="request()->routeIs('organisasi.*')">
+                <x-responsive-nav-link :href="route('admin.organisasi.index')" :active="request()->routeIs('organisasi.*')">
                     {{ __('Struktur Organisasi') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('pengaduan.index')" :active="request()->routeIs('pengaduan.*')">
+                <x-responsive-nav-link :href="route('admin.pengaduan.index')" :active="request()->routeIs('pengaduan.*')">
                     {{ __('Pengaduan') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.panduan.index')" :active="request()->routeIs('panduan.*')">
+                    {{ __('Panduan') }}
                 </x-responsive-nav-link>
             @endif
         </div>

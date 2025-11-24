@@ -14,23 +14,25 @@
     {{-- Alpine.js untuk navbar toggle --}}
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gray-100 text-green-900 font-sans leading-relaxed">
+<body class="bg-gray-100 text-green-900 font-sans leading-relaxed"
+x-data="{ 
+        akses:false, 
+        invert:false,
+        bigtext:false,
+        hicontrast:false 
+    }"
+    x-bind:class="{
+        'invert-filter': invert,
+        'big-text': bigtext,
+        'high-contrast': hicontrast
+    }">
 
     {{-- Navbar --}}
     <nav class="bg-green-600 p-4 shadow-md sticky top-0 z-50" x-data="{ open: false }">
         <div class="container mx-auto flex justify-between items-center">
             <a class="text-white text-xl font-bold tracking-wide" href="/">Desa Bomo</a>
 
-            {{-- Tombol Hamburger (mobile) --}}
-            <button @click="open = !open" class="text-white md:hidden focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                     viewBox="0 0 24 24" stroke="currentColor">
-                    <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M4 6h16M4 12h16M4 18h16"/>
-                    <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
+ 
 
             {{-- Menu Utama --}}
             <ul class="hidden md:flex space-x-6">
@@ -57,7 +59,8 @@
     </nav>
 
     {{-- Content --}}
-    <main class="container mx-auto mt-6 px-4" data-aos="fade-up">
+    <main class="container mx-auto mt-6 px-4 pb-24 md:pb-6" data-aos="fade-up">
+
         @yield('content')
     </main>
 
@@ -75,5 +78,84 @@
             once: true
         });
     </script>
+
+
+</div>
+
+<!-- Bottom Navigation Mobile -->
+<div class="fixed bottom-4 left-4 right-4 bg-white shadow-lg border rounded-2xl md:hidden z-40 p-2">
+    <div class="grid grid-cols-4 gap-2">
+
+        <!-- Beranda -->
+        <a href="/"
+           class="flex flex-col items-center gap-1 p-2 rounded-xl border 
+           {{ request()->is('/') ? 'bg-green-600 text-white border-green-600' : 'text-green-600 border-green-300' }}">
+            <x-heroicon-o-home class="w-6 h-6" />
+            <span class="text-xs font-semibold">BERANDA</span>
+        </a>
+
+        <!-- Profil Desa -->
+        <a href="/profil-desa"
+           class="flex flex-col items-center gap-1 p-2 rounded-xl border
+           {{ request()->is('profil-desa') ? 'bg-green-600 text-white border-green-600' : 'text-green-600 border-green-300' }}">
+            <x-heroicon-o-information-circle class="w-6 h-6" />
+            <span class="text-xs">PROFIL</span>
+        </a>
+
+        <!-- Informasi Publik -->
+        <a href="/informasi-publik"
+           class="flex flex-col items-center gap-1 p-2 rounded-xl border
+           {{ request()->is('informasi-publik') ? 'bg-green-600 text-white border-green-600' : 'text-green-600 border-green-300' }}">
+            <x-heroicon-o-document-text class="w-6 h-6" />
+            <span class="text-xs">INFORMASI</span>
+        </a>
+
+        <!-- Pengaduan -->
+        <a href="/pengaduan"
+           class="flex flex-col items-center gap-1 p-2 rounded-xl border
+           {{ request()->is('pengaduan') ? 'bg-green-600 text-white border-green-600' : 'text-green-600 border-green-300' }}">
+            <x-heroicon-o-chat-bubble-left-right class="w-6 h-6" />
+            <span class="text-xs">PENGADUAN</span>
+        </a>
+
+    </div>
+</div>
+
+<!-- Tombol Aksesibilitas -->
+<button 
+    @click="akses = !akses"
+    class="fixed bottom-28 right-4 bg-green-600 text-white p-4 rounded-full shadow-lg active:scale-95 transition z-50"
+>
+    ♿
+</button>
+<!-- Popup Aksesibilitas -->
+<div 
+    x-show="akses"
+    x-transition
+    class="fixed bottom-36 right-4 bg-white shadow-lg border rounded-xl p-4 space-y-3 w-48 z-50">
+
+    <!-- Balik Warna -->
+    <button 
+        @click="invert = !invert"
+        class="w-full text-left px-3 py-2 rounded-md border">
+        Balik Warna
+    </button>
+
+    <!-- Teks Besar -->
+    <button 
+        @click="bigtext = !bigtext"
+        class="w-full text-left px-3 py-2 rounded-md border">
+        Teks Besar
+    </button>
+
+    <!-- Kontras Tinggi -->
+    <button 
+        @click="hicontrast = !hicontrast"
+        class="w-full text-left px-3 py-2 rounded-md border">
+        Kontras Tinggi
+    </button>
+
+</div>
+
 </body>
 </html>
