@@ -29,7 +29,7 @@
                                 <td class="border px-4 py-2">{{ $aduan->isi_pengaduan }}</td>
                                 <td class="border px-4 py-2">{{ $aduan->status }}</td>
                                 <td class="border px-4 py-2">
-                                    <a href="{{ route('pengaduan.edit', $aduan->id) }}" class="btn btn-warning">Ubah Status</a>
+                                    <a href="{{ route('admin.pengaduan.edit', $aduan->id) }}" class="btn btn-warning">Ubah Status</a>
                                 </td>
                             </tr>
                             @endforeach

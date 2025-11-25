@@ -9,7 +9,7 @@ class ProfilDesaController extends Controller
     public function index()
     {
 
-        $profildesa = ProfilDesa::all();
+        $profildesa = ProfilDesa::first();
         return view('admin.profil-desa', compact('profildesa'));
     }
     public function showUserView()

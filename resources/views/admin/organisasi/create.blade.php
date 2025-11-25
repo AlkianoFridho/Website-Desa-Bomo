@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <form action="{{ route('organisasi.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    <form action="{{ route('admin.organisasi.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                         @csrf
                         
                         <!-- Nama -->
@@ -38,7 +38,7 @@
 
                         <!-- Tombol -->
                         <div class="flex justify-between">
-                            <a href="{{ route('organisasi.index') }}" 
+                            <a href="{{ route('admin.organisasi.index') }}" 
                                class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
                                 ⬅ Kembali
                             </a>

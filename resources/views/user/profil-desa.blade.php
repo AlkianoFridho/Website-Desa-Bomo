@@ -2,6 +2,15 @@
 @extends('layouts.appuser')
 
 @section('content')
+<!-- Mobile Hero Image (Only on Mobile) -->
+<div class="w-full md:hidden mb-6">
+    <img 
+        src="https://upload.wikimedia.org/wikipedia/commons/6/64/Kantordesabomorogojampibanyuwangi.JPG"
+        alt="Kantor Desa Bomo"
+        class="w-full h-56 object-cover rounded-lg shadow-md"
+    >
+</div>
+
 <div class="container mx-auto px-6">
     <section class="my-12 text-center">
         <h2 class="text-3xl font-bold text-green-700">Profil Desa Bomo</h2>

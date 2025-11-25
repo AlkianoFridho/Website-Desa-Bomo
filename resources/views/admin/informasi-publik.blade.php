@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-semibold">Daftar Informasi Publik</h3>
                     
-                    <a href="{{ route('informasi-publik.create') }}" class="btn btn-primary mb-4">Tambah Informasi</a>
+                    <a href="{{ route('admin.informasi-publik.create') }}" class="btn btn-primary mb-4">Tambah Informasi</a>
 
                     <table class="table-auto w-full text-left">
                         <thead>
@@ -27,8 +27,8 @@
                                 <td class="border px-4 py-2">{{ $info->judul }}</td>
                                 <td class="border px-4 py-2">{{ $info->kategori }}</td>
                                 <td class="border px-4 py-2">
-                                    <a href="{{ route('informasi-publik.edit', $info->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('informasi-publik.destroy', $info->id) }}" method="POST" class="inline-block">
+                                    <a href="{{ route('admin.informasi-publik.edit', $info->id) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('admin.informasi-publik.destroy', $info->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Hapus</button>

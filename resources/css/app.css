@@ -45,3 +45,19 @@ html, body {
 .footer {
     @apply bg-green-600 text-white text-center py-4 mt-8;
 }
+
+/* Mode Invert Warna */
+.invert-filter {
+    filter: invert(100%) hue-rotate(180deg);
+}
+
+/* Teks Besar */
+.big-text {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.6;
+}
+
+/* Kontras Tinggi */
+.high-contrast {
+    filter: contrast(180%);
+}
