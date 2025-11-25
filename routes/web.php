@@ -7,7 +7,6 @@ use App\Http\Controllers\ProfilDesaController;
 use App\Http\Controllers\InformasiPublikController;
 use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\PengaduanController;
-use App\Http\Controllers\OnboardingController;
 
 Route::get('/', function () {
     return view('user.home');
@@ -39,5 +38,3 @@ Route::resource('admin/organisasi', OrganisasiController::class);
 // 📌 Pengaduan
 Route::resource('admin/pengaduan', PengaduanController::class)->only(['index', 'edit', 'update']);
 require __DIR__.'/auth.php';
-
-Route::get('/welcome', [OnboardingController::class, 'show'])->name('onboarding.show');
