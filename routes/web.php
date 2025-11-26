@@ -12,6 +12,7 @@ use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\BantuanController;
 use App\Http\Controllers\BantuanChatController;
 use App\Http\Controllers\BantuanRatingController;
+use App\Http\Controllers\OnboardingController; // <-- TAMBAHKAN INI
 
 
 // =============================
@@ -21,6 +22,10 @@ Route::get('/', function () {
     return view('user.home');
 })->name('home');
 
+// Rute Onboarding
+Route::get('/welcome', [OnboardingController::class, 'show'])->name('onboarding.show');
+Route::get('/tutorial', [OnboardingController::class, 'showTutorial'])->name('onboarding.tutorial');
+Route::get('/completion', [OnboardingController::class, 'showCompletion'])->name('onboarding.completion');
 Route::get('/profil-desa', [ProfilDesaController::class, 'showUserView'])->name('profil-desa');
 Route::get('/informasi-publik', [InformasiPublikController::class, 'showUserView'])->name('informasi');
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
