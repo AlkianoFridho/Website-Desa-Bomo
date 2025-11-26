@@ -94,6 +94,10 @@ Route::post('/bantuan/start', [BantuanChatController::class, 'start'])->name('ba
 // Kirim pesan chat
 Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])->name('bantuan.chat.send');
 
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
+// 📌 Bantuan
 // Akhiri chat
 Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
 
