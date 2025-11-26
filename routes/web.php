@@ -8,10 +8,11 @@ use App\Http\Controllers\ProfilDesaController;
 use App\Http\Controllers\InformasiPublikController;
 use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\BantuanController;
-use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\BantuanChatController;
+use App\Http\Controllers\BantuanRatingController;
 
-use App\Http\Controllers\PanduanController;
 
 // =============================
 // User Page Routes
@@ -25,6 +26,7 @@ Route::get('/informasi-publik', [InformasiPublikController::class, 'showUserView
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
 Route::get('/pengaduan', [PengaduanController::class, 'showUserView'])->name('pengaduan');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::get('/bantuan', [BantuanController::class, 'index'])->name('user.bantuan');
 
 // 👉 Halaman Panduan di sisi User
 Route::get('/panduan', [PanduanController::class, 'showUserView'])->name('panduan.user');
@@ -72,7 +74,23 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// 📌 Bantuan
+
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
+
+// =============================
+// Bantuan - Chat dan Rating
+// =============================
+
+// Start chat
+Route::post('/bantuan/start', [BantuanChatController::class, 'start'])->name('bantuan.start');
+
+// Kirim pesan chat
+Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])->name('bantuan.chat.send');
+
+// Akhiri chat
+Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
+
+// Simpan rating
+Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])->name('bantuan.rating');
