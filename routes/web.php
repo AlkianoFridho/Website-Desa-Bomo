@@ -12,6 +12,8 @@ use App\Http\Controllers\BantuanController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\OnboardingController; // <-- TAMBAHKAN INI
 
+use App\Http\Controllers\PanduanController;
+
 // =============================
 // User Page Routes
 // =============================
@@ -28,8 +30,6 @@ Route::get('/informasi-publik', [InformasiPublikController::class, 'showUserView
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
 Route::get('/pengaduan', [PengaduanController::class, 'showUserView'])->name('pengaduan');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
-Route::get('/bantuan', [BantuanController::class, 'index'])->name('user.bantuan');
-
 
 // 👉 Halaman Panduan di sisi User
 Route::get('/panduan', [PanduanController::class, 'showUserView'])->name('panduan.user');
