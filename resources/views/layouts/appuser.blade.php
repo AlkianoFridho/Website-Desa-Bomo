@@ -41,6 +41,7 @@ x-data="{
                 <li><a class="text-white hover:text-green-300 transition" href="/organisasi">Organisasi</a></li>
                 <li><a class="text-white hover:text-green-300 transition" href="/informasi-publik">Informasi Publik</a></li>
                 <li><a class="text-white hover:text-green-300 transition" href="/pengaduan">Pengaduan</a></li>
+                <li><a class="text-white hover:text-green-300 transition" href="/panduan">Panduan</a></li>
                 <li><a class="text-white hover:text-green-300 transition" href="/bantuan">Bantuan</a></li>
             </ul>
         </div>
@@ -53,6 +54,7 @@ x-data="{
                 <li><a class="text-white hover:text-green-300 transition" href="/organisasi">Organisasi</a></li>
                 <li><a class="text-white hover:text-green-300 transition" href="/informasi-publik">Informasi Publik</a></li>
                 <li><a class="text-white hover:text-green-300 transition" href="/pengaduan">Pengaduan</a></li>
+                <li><a class="text-white hover:text-green-300 transition" href="/panduan">Panduan</a></li>
                 <li><a class="text-white hover:text-green-300 transition" href="/bantuan">Bantuan</a></li>
             </ul>
         </div>
