@@ -72,5 +72,22 @@ require __DIR__.'/auth.php';
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
-// 📌 Bantuan
+
+
+//potensi_RouteBaru
+// Wisata
+Route::get('/wisata', function () {
+    return view('user.wisata');
+})->name('wisata');
+
+// Perikanan
+Route::get('/perikanan', function () {
+    return view('user.perikanan');
+})->name('perikanan');
+
+// Pertanian
+Route::get('/pertanian', function () {
+    return view('user.pertanian');
+})->name('pertanian');
+
 
