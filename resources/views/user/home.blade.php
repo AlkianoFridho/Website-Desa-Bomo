@@ -142,5 +142,3 @@ class="bg-white text-green-700 font-semibold p-4 rounded-xl text-center shadow-m
 
 
 @endsection
-
-
