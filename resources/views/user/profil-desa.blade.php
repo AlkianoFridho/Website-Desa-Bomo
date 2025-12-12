@@ -2,23 +2,23 @@
 
 @section('content')
 
-{{-- 
-|--------------------------------------------------------------------------
-| 🏞️ HERO SECTION: DESKTOP VIEW
-|--------------------------------------------------------------------------
---}}
 <section class="relative hidden md:block w-full text-white mt-[-80px] pt-32 md:pt-48 pb-24">
     
     {{-- Background Image & Overlay --}}
-    <div class="absolute inset-0 rounded-b-[56px] overflow-hidden shadow-2xl" data-aos="fade-down">
-        <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/6/64/Kantordesabomorogojampibanyuwangi.JPG"
-            class="w-full h-full object-cover scale-[1.05] brightness-[0.85]"
-            alt="Kantor Desa Bomo"
-        >
-        {{-- Dark Gradient Overlay (Emerald) --}}
-        <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/95 via-emerald-900/65 to-transparent"></div>
-    </div>
+ <div class="absolute inset-0 rounded-b-[56px] overflow-hidden shadow-2xl" data-aos="fade-down">
+    
+    <!-- Background Image -->
+    <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/64/Kantordesabomorogojampibanyuwangi.JPG"
+        class="w-full h-full object-cover scale-[1.05] brightness-[0.70]"
+        alt="Kantor Desa Bomo"
+    >
+
+    <div class="absolute inset-0 bg-gradient-to-b from-emerald-900/80 via-emerald-900/50 to-emerald-900/20"></div>
+    
+    <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/90 via-transparent to-transparent"></div>
+</div>
+
 
     <div class="container mx-auto px-8 relative z-10">
         <div class="max-w-4xl pt-16 md:pt-24">
@@ -43,12 +43,6 @@
         </div>
     </div>
 </section>
-
-{{-- 
-|--------------------------------------------------------------------------
-| 📱 HERO SECTION: MOBILE VIEW
-|--------------------------------------------------------------------------
---}}
 <section class="relative md:hidden w-full">
     <div class="relative h-[420px] overflow-hidden rounded-b-[48px] shadow-2xl" data-aos="fade-down">
         <img 
@@ -76,12 +70,6 @@
 </section>
 
 <div class="container mx-auto px-6">
-    
-    {{-- 
-    |--------------------------------------------------------------------------
-    | 🏠 INTRODUCTION SECTION
-    |--------------------------------------------------------------------------
-    --}}
     <section class="mt-16 mb-20 text-center max-w-6xl mx-auto" data-aos="fade-up" data-aos-delay="700">
         {{-- Section Title --}}
         <div class="inline-flex items-center gap-3 mb-6">
