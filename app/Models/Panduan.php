@@ -18,4 +18,9 @@ class Panduan extends Model
         'dibuat_oleh',
         'views'
     ];
+    public function comments()
+{
+    return $this->hasMany(Comment::class, 'panduan_id');
+}
+
 }

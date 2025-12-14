@@ -9,7 +9,7 @@
     <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
         <source src="{{ asset('assets/BOMO KU BUMI KU.mp4') }}" type="video/mp4">
     </video>
-
+   
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
 
@@ -32,6 +32,7 @@
 
 <!-- Hero Mobile () -->
 <section class="md:hidden bg-gradient-to-b from-green-700 to-green-900 text-white py-16 px-6">
+    
     <h1 class="text-3xl font-bold text-center mb-6">Selamat Datang di Desa Bomo</h1>
     <p class="text-center text-sm mb-8 opacity-90">
         Desa dengan budaya, sejarah, dan kekayaan alam yang asri.
@@ -52,25 +53,82 @@ class="bg-white text-green-700 font-semibold p-4 rounded-xl text-center shadow-m
 </section>
 
 
-<!-- Profil Desa -->
-<section id="profil-home" class="py-16 bg-white" data-aos="fade-up">
-    <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-        <!-- Logo Desa -->
-        <div class="flex justify-center" data-aos="fade-right">
-            <img src="{{ asset('assets/banyuwangi.png') }}" alt="Logo Desa Bomo" class="w-60 h-auto object-contain">
+<!-- Profil Desa & Infografis -->
+<section class="py-16 bg-white" data-aos="fade-up">
+    <div class="max-w-screen-xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+
+        <!-- PROFIL DESA -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl transition relative overflow-hidden flex flex-col justify-between">
+
+            <!-- Garis Hijau -->
+            <div class="absolute top-0 left-0 w-full h-[5px] bg-green-600"></div>
+
+            <!-- ICON -->
+            <div class="flex justify-center pt-10">
+                <img src="{{ asset('assets/banyuwangi.png') }}" class="w-36 h-auto object-contain">
+            </div>
+
+            <!-- KONTEN -->
+            <div class="text-center px-8">
+                <h3 class="text-2xl font-bold mb-3 text-gray-800 mt-6">
+                    PROFIL DESA BOMO
+                </h3>
+
+                <p class="text-gray-600 mb-10 leading-relaxed">
+                    Informasi lengkap sejarah, wilayah, dan kehidupan sosial Desa Bomo.
+                </p>
+            </div>
+
+            <!-- TOMBOL -->
+            <div class="pb-8 text-center">
+                <a href="{{ route('profil-desa') }}"
+                   class="inline-block px-8 py-3 bg-green-600 text-white rounded-full font-semibold text-sm hover:bg-green-700 transition">
+                   Baca Selengkapnya
+                </a>
+            </div>
+
         </div>
 
-        <!-- Konten Profil -->
-        <div class="md:col-span-2" data-aos="fade-left">
-            <h2 class="text-3xl font-bold text-green-700 mb-4">Profil Desa Bomo</h2>
-            <p class="text-gray-700 leading-relaxed">
-                Terletak di Kecamatan Rogojampi, Kabupaten Banyuwangi, <strong>Desa Bomo</strong> memiliki sejarah yang kaya serta kekayaan budaya yang menjadikannya salah satu desa yang harmonis dan damai. 
-                <br><br>
-                Desa ini dikenal dengan kehidupan masyarakat yang rukun, potensi wisata bahari dan pegunungan, serta berbagai kegiatan adat yang masih lestari. Lingkungannya yang asri menjadikan Bomo tempat ideal untuk edukasi budaya dan rekreasi keluarga.
-            </p>
+        <!-- INFOGRAFIS -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl transition relative overflow-hidden flex flex-col justify-between">
+
+            <!-- Garis Hijau -->
+            <div class="absolute top-0 left-0 w-full h-[5px] bg-green-600"></div>
+
+            <!-- ICON -->
+            <div class="flex justify-center pt-10">
+                <img src="{{ asset('assets/iconinfografis.png') }}" class="w-36 h-auto object-contain">
+            </div>
+
+            <!-- KONTEN -->
+            <div class="text-center px-8">
+                <h3 class="text-2xl font-bold mb-3 text-gray-800 mt-6">
+                    INFOGRAFIS DESA
+                </h3>
+
+                <p class="text-gray-600 mb-10 leading-relaxed">
+                    Data visual kependudukan serta potensi unggulan Desa Bomo.
+                </p>
+            </div>
+
+            <!-- TOMBOL -->
+            <div class="pb-8 text-center">
+                <a href="{{ route('infografis') }}"
+                   class="inline-block px-8 py-3 bg-green-600 text-white rounded-full font-semibold text-sm hover:bg-green-700 transition">
+                   Lihat Infografis
+                </a>
+            </div>
+
         </div>
     </div>
 </section>
+
+
+
+
+
+
+
 
 <!-- Berita Terbaru -->
 <section class="container mx-auto px-6 py-16 bg-gray-50" data-aos="fade-up">
