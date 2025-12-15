@@ -26,16 +26,6 @@
             <p class="text-2xl font-light opacity-95 mb-10"
                data-aos="fade-up" data-aos-delay="600">
                 Gerbang Keindahan Alam dan Kearifan Lokal Banyuwangi.
-   
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
-
-    <!-- Text -->
-    <div class="relative z-20 flex items-center justify-center h-full px-4 text-center">
-        <div class="text-white max-w-3xl" data-aos="fade-up">
-            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Selamat Datang di Desa Bomo</h1>
-            <p class="text-lg md:text-xl opacity-90">
-                Desa Bomo, permata Kecamatan Rogojampi, Banyuwangi.
             </p>
 
             <a href="#profil-home"
@@ -53,12 +43,6 @@
     <h1 class="text-4xl font-extrabold text-center mb-4" data-aos="fade-down">Desa Bomo</h1>
     <p class="text-center text-md mb-8 opacity-90" data-aos="fade-down" data-aos-delay="100">
         Warisan budaya dan keindahan alam Rogojampi.
-<!-- Hero Mobile () -->
-<section class="md:hidden bg-gradient-to-b from-green-700 to-green-900 text-white py-16 px-6">
-    
-    <h1 class="text-3xl font-bold text-center mb-6">Selamat Datang di Desa Bomo</h1>
-    <p class="text-center text-sm mb-8 opacity-90">
-        Desa dengan budaya, sejarah, dan kekayaan alam yang asri.
     </p>
 
     <div class="grid grid-cols-2 gap-4">
@@ -83,7 +67,7 @@
             <span class="text-sm font-semibold uppercase text-yellow-700 block mb-2 tracking-widest">Kearifan Lokal</span>
             <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-6 border-b border-gray-300 pb-4">Desa Bomo: Sebuah Warisan</h2>
             <p class="text-gray-700 leading-relaxed text-lg mb-6">
-                Terletak di Kecamatan Rogojampi, Kabupaten Banyuwangi, **Desa Bomo** adalah perpaduan harmonis antara *kearifan lokal* dan kemajuan. Sejarahnya yang kaya membentuk masyarakat yang rukun, damai, dan menjunjung tinggi nilai-nilai adat.
+                Terletak di Kecamatan Rogojampi, Kabupaten Banyuwangi, *Desa Bomo* adalah perpaduan harmonis antara kearifan lokal dan kemajuan. Sejarahnya yang kaya membentuk masyarakat yang rukun, damai, dan menjunjung tinggi nilai-nilai adat.
             </p>
             <blockquote class="text-gray-600 leading-relaxed italic border-l-4 border-emerald-600 pl-6 py-3 bg-white shadow-lg rounded-r-lg hover:shadow-xl transition duration-300">
                  "Desa ini dikenal dengan kehidupan masyarakat yang rukun, potensi wisata bahari dan pegunungan, serta berbagai kegiatan adat yang masih lestari."
@@ -99,72 +83,6 @@
             <span class="inline-block bg-emerald-600 text-white text-md font-bold px-6 py-2 rounded-full tracking-wider uppercase shadow-lg shadow-emerald-700/40">
                 Desa Bomo, Rogojampi
             </span>
-<!-- Profil Desa & Infografis -->
-<section class="py-16 bg-white" data-aos="fade-up">
-    <div class="max-w-screen-xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
-
-        <!-- PROFIL DESA -->
-        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl transition relative overflow-hidden flex flex-col justify-between">
-
-            <!-- Garis Hijau -->
-            <div class="absolute top-0 left-0 w-full h-[5px] bg-green-600"></div>
-
-            <!-- ICON -->
-            <div class="flex justify-center pt-10">
-                <img src="{{ asset('assets/banyuwangi.png') }}" class="w-36 h-auto object-contain">
-            </div>
-
-            <!-- KONTEN -->
-            <div class="text-center px-8">
-                <h3 class="text-2xl font-bold mb-3 text-gray-800 mt-6">
-                    PROFIL DESA BOMO
-                </h3>
-
-                <p class="text-gray-600 mb-10 leading-relaxed">
-                    Informasi lengkap sejarah, wilayah, dan kehidupan sosial Desa Bomo.
-                </p>
-            </div>
-
-            <!-- TOMBOL -->
-            <div class="pb-8 text-center">
-                <a href="{{ route('profil-desa') }}"
-                   class="inline-block px-8 py-3 bg-green-600 text-white rounded-full font-semibold text-sm hover:bg-green-700 transition">
-                   Baca Selengkapnya
-                </a>
-            </div>
-
-        </div>
-
-        <!-- INFOGRAFIS -->
-        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl transition relative overflow-hidden flex flex-col justify-between">
-
-            <!-- Garis Hijau -->
-            <div class="absolute top-0 left-0 w-full h-[5px] bg-green-600"></div>
-
-            <!-- ICON -->
-            <div class="flex justify-center pt-10">
-                <img src="{{ asset('assets/iconinfografis.png') }}" class="w-36 h-auto object-contain">
-            </div>
-
-            <!-- KONTEN -->
-            <div class="text-center px-8">
-                <h3 class="text-2xl font-bold mb-3 text-gray-800 mt-6">
-                    INFOGRAFIS DESA
-                </h3>
-
-                <p class="text-gray-600 mb-10 leading-relaxed">
-                    Data visual kependudukan serta potensi unggulan Desa Bomo.
-                </p>
-            </div>
-
-            <!-- TOMBOL -->
-            <div class="pb-8 text-center">
-                <a href="{{ route('infografis') }}"
-                   class="inline-block px-8 py-3 bg-green-600 text-white rounded-full font-semibold text-sm hover:bg-green-700 transition">
-                   Lihat Infografis
-                </a>
-            </div>
-
         </div>
     </div>
 </section>
@@ -177,16 +95,6 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-
-
-
-
-
-<!-- Berita Terbaru -->
-<section class="container mx-auto px-6 py-16 bg-gray-50" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-green-700 text-center mb-10">Berita Terbaru</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @foreach(range(1, 3) as $i)
         <div class="bg-gray-50 rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition duration-500 group overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $i * 200 }}">
             <div class="relative overflow-hidden">
