@@ -73,20 +73,49 @@
 
 <!-- GALERI (OPSIONAL – TANPA GAMBAR DULU) -->
 <section class="container mx-auto px-6 py-14">
-    <h2 class="text-2xl font-bold text-center text-green-700 mb-8">
+    <h2 class="text-2xl font-bold text-center text-green-700 mb-10">
         Galeri Wisata Desa
     </h2>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="h-32 bg-green-100 rounded-lg"></div>
-        <div class="h-32 bg-green-100 rounded-lg"></div>
-        <div class="h-32 bg-green-100 rounded-lg"></div>
-        <div class="h-32 bg-green-100 rounded-lg"></div>
-    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        
+        <div class="group bg-white p-2 rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
+            <div class="h-48 overflow-hidden rounded-lg">
+                <img src="{{ asset('assets/images/wisata/wisata1.jpg') }}" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
+                     alt="Peresmian Desa Pintar">
+            </div>
+            <p class="mt-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Pantai Bomo</p>
+        </div>
 
-    <p class="text-center text-sm text-gray-500 mt-4">
-        *Galeri akan diperbarui dengan dokumentasi wisata Desa Bomo
-    </p>
+        <div class="group bg-white p-2 rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
+            <div class="h-48 overflow-hidden rounded-lg">
+                <img src="{{ asset('assets/images/wisata/wisata2.jpg') }}" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
+                     alt="potret pantai bomo">
+            </div>
+            <p class="mt-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tradisi Lokal</p>
+        </div>
+
+        <div class="group bg-white p-2 rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
+            <div class="h-48 overflow-hidden rounded-lg">
+                <img src="{{ asset('assets/images/wisata/wisata3.jpg') }}" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
+                     alt="Edukasi masyarakat">
+            </div>
+            <p class="mt-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Ekowisata</p>
+        </div>
+
+        <div class="group bg-white p-2 rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300">
+            <div class="h-48 overflow-hidden rounded-lg">
+                <img src="{{ asset('assets/images/wisata/wisata4.jpg') }}" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
+                     alt="Pelatihan Warga">
+            </div>
+            <p class="mt-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Pemandangan Alam</p>
+        </div>
+
+    </div>
 </section>
 
 <!-- DATA SINGKAT -->

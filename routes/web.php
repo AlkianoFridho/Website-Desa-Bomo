@@ -82,9 +82,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-Route::get('/infografis', function () {
-    return view('user.infografis');
-})->name('infografis');
+
 
 // =============================
 // Bantuan - Chat dan Rating
@@ -110,25 +108,34 @@ Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
 Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
     ->name('bantuan.chat.send');
 
-Route::get('/infografis', function () {
-    return view('user.infografis');
-})->name('infografis');
 
-//potensi_RouteBaru
-// Wisata
-Route::get('/wisata', function () {
-    return view('user.wisata');
-})->name('wisata');
+// =============================
+// Sektor Infografis & Potensi Desa
+// =============================
+Route::prefix('infografis')->group(function () {
+    
+    // Halaman Utama Infografis
+    Route::get('/', function () {
+        return view('user.infografis.index-infografis');
+    })->name('infografis');
 
-// Perikanan
-Route::get('/perikanan', function () {
-    return view('user.perikanan');
-})->name('perikanan');
+    // Detail Potensi Wisata
+    Route::get('/wisata', function () {
+        return view('user.infografis.wisata');
+    })->name('wisata');
 
-// Pertanian
-Route::get('/pertanian', function () {
-    return view('user.pertanian');
-})->name('pertanian');
+    // Detail Potensi Perikanan
+    Route::get('/perikanan', function () {
+        return view('user.infografis.perikanan');
+    })->name('perikanan');
+
+    // Detail Potensi Pertanian
+    Route::get('/pertanian', function () {
+        return view('user.infografis.pertanian');
+    })->name('pertanian');
+    
+});
+
 // 📌 Bantuan
 // Akhiri chat
 Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
