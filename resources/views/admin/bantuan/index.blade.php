@@ -51,7 +51,7 @@
                                     </td>
 
                                     <td class="px-4 py-3 text-center">
-                                        <a href="{{ route('admin.bantuan.chat', ['session_id' => $chat->session_id]) }}"
+                                        <a href="{{ route('admin.bantuan.chat', $chat->session_id) }}"
                                            class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs">
                                             Lihat Chat
                                         </a>

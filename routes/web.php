@@ -79,6 +79,14 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])
 |--------------------------------------------------------------------------
 */
 
+// ambil semua chat berdasarkan session_id (AJAX polling)
+Route::get('/bantuan/chat/fetch', [BantuanChatController::class, 'fetch'])
+    ->name('bantuan.chat.fetch');
+
+
+// 👉 Mengakhiri sesi chat
+Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
+    ->name('bantuan.chat.end');
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
@@ -106,6 +114,13 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/bantuan/chat/messages', [BantuanChatController::class, 'messages'])
+    ->name('bantuan.chat.messages');
+
+
+// =============================
+// ADMIN - Layanan Bantuan Chat
+// =============================
 
 /*
 |--------------------------------------------------------------------------
@@ -148,6 +163,27 @@ Route::middleware('auth')
         Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
             ->name('bantuan.reply');
     });
+
+
+
+    
+// =============================
+// Auth Profile
+// =============================
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
+
+
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
+// Ambil komentar
+Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
 
 
 /*
