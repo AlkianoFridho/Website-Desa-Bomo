@@ -8,82 +8,72 @@ use Illuminate\Support\Str;
 
 class BantuanChatController extends Controller
 {
-    /**
-     * Mulai chat — generate session_id, simpan kategori, buat initial message
-     */
     public function start(Request $request)
     {
-        $request->validate([
-            'kategori' => 'required'
-        ]);
+        $request->validate(['kategori' => 'required']);
 
-        // buat session id unik untuk percakapan ini
         $sessionId = (string) Str::uuid();
 
-        // simpan ke session agar halaman chat bisa memakai session_id & kategori
         session([
             'bantuan_session_id' => $sessionId,
-            'bantuan_kategori' => $request->kategori,
+            'bantuan_kategori'   => $request->kategori,
         ]);
 
-        // Buat record awal supaya admin punya baris untuk grouped session
         BantuanMessage::create([
             'session_id' => $sessionId,
-            'sender' => 'user',
-            'message' => 'Memulai percakapan',
-            'kategori' => $request->kategori,
-            'user_name' => null,
+            'sender'     => 'user',
+            'message'    => 'Memulai percakapan',
+            'kategori'   => $request->kategori,
         ]);
 
-        // redirect ke view chat user
         return redirect()->route('bantuan.chat.view');
     }
 
-    /**
-     * Kirim pesan user (AJAX)
-     */
-    public function send(Request $request)
+    public function chatView()
     {
-        $request->validate([
-            'message' => 'required'
-        ]);
-
-        $sessionId = session('bantuan_session_id');
-
-        if (! $sessionId) {
-            return response()->json(['error' => 'Session chat tidak ditemukan'], 422);
+        if (!session('bantuan_session_id')) {
+            return redirect()->route('user.bantuan');
         }
 
+        return view('user.bantuan-chat', [
+            'session_id' => session('bantuan_session_id'),
+            'kategori'   => session('bantuan_kategori'),
+        ]);
+    }
+
+    public function send(Request $request)
+    {
+        $request->validate(['message' => 'required']);
+
         BantuanMessage::create([
-            'session_id' => $sessionId,
-            'sender' => 'user',
-            'message' => $request->message,
-            'kategori' => session('bantuan_kategori') 
+            'session_id' => session('bantuan_session_id'),
+            'sender'     => 'user',
+            'message'    => $request->message,
+            'kategori'   => session('bantuan_kategori'),
         ]);
 
         return response()->json(['status' => 'sent']);
     }
 
-    /**
-     * Tampilkan view chat user (pastikan session ada)
-     */
-    public function chatView()
+    // 🔥 AMBIL CHAT (USER & ADMIN)
+    public function fetch()
     {
-        $kategori = session('bantuan_kategori');
+        $sessionId = session('bantuan_session_id');
 
-        if (! $kategori || ! session('bantuan_session_id')) {
-            return redirect()->route('user.bantuan')->with('error', 'Pilih kategori dahulu!');
+        if (! $sessionId) {
+            return response()->json([]);
         }
 
-        return view('user.bantuan-chat', [
-            'kategori' => $kategori,
-            'session_id' => session('bantuan_session_id')
-        ]);
+        $messages = BantuanMessage::where('session_id', $sessionId)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return response()->json($messages);
     }
+
 
     public function end()
     {
-        // Opsional: hapus session keys
         session()->forget(['bantuan_session_id', 'bantuan_kategori']);
         return response()->json(['status' => 'ended']);
     }

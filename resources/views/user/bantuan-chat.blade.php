@@ -31,16 +31,76 @@
         </div>
 
         {{-- Area Chat --}}
-        <div id="chatArea" class="h-72 overflow-y-auto mt-3 space-y-3 text-sm">
+        <div id="chatArea" class="h-72 overflow-y-auto mt-3 space-y-3 text-sm"></div>
+        <script>
+        const chatArea = document.getElementById('chatArea');
 
-            {{-- Pesan Admin pembuka --}}
-            <div class="flex">
-                <div class="bg-green-600 text-white p-3 rounded-lg max-w-[75%]">
-                    Apakah ada yang bisa dibantu ?
-                </div>
-            </div>
+        function loadMessages() {
+            fetch("{{ route('bantuan.chat.fetch') }}")
+                .then(res => res.json())
+                .then(data => {
+                    chatArea.innerHTML = '';
 
-        </div>
+                    data.forEach(msg => {
+                        if (msg.sender === 'user') {
+                            chatArea.innerHTML += `
+                                <div class="flex justify-end">
+                                    <div class="bg-gray-200 p-3 rounded-lg max-w-[75%]">
+                                        ${msg.message}
+                                    </div>
+                                </div>`;
+                        } else {
+                            chatArea.innerHTML += `
+                                <div class="flex">
+                                    <div class="bg-green-600 text-white p-3 rounded-lg max-w-[75%]">
+                                        ${msg.message}
+                                    </div>
+                                </div>`;
+                        }
+                    });
+
+                    chatArea.scrollTop = chatArea.scrollHeight;
+                });
+        }
+
+        // LOAD PERTAMA
+        loadMessages();
+
+        // 🔁 POLLING TIAP 3 DETIK
+        setInterval(loadMessages, 3000);
+
+        // SEND CHAT
+        document.getElementById('chatForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            let message = messageInput.value;
+            if (!message.trim()) return;
+
+            fetch("{{ route('bantuan.chat.send') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({ message })
+            }).then(() => {
+                messageInput.value = "";
+                loadMessages();
+            });
+        });
+
+        // END CHAT
+        document.getElementById('endChatForm').addEventListener('submit', function(e){
+            e.preventDefault();
+
+            fetch("{{ route('bantuan.chat.end') }}", {
+                method: "POST",
+                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" }
+            }).then(() => {
+                window.location.href = "/bantuan-rating";
+            });
+        });
+        </script>
+
 
         {{-- Input Chat --}}
         <form id="chatForm" class="mt-4 flex items-center gap-2">

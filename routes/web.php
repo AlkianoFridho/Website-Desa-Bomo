@@ -71,22 +71,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 });
 
 
-// =============================
-// Auth Profile
-// =============================
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__ . '/auth.php';
-
-
-Route::get('/infografis', function () {
-    return view('user.infografis');
-})->name('infografis');
-
 
 // =============================
 // Bantuan - Chat dan Rating
@@ -108,6 +92,14 @@ Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
 Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
     ->name('bantuan.chat.send');
 
+// ambil semua chat berdasarkan session_id (AJAX polling)
+Route::get('/bantuan/chat/fetch', [BantuanChatController::class, 'fetch'])
+    ->name('bantuan.chat.fetch');
+
+
+// 👉 Mengakhiri sesi chat
+Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
+    ->name('bantuan.chat.end');
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
@@ -136,6 +128,10 @@ Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
     ->name('bantuan.rating');
 
 
+Route::get('/bantuan/chat/messages', [BantuanChatController::class, 'messages'])
+    ->name('bantuan.chat.messages');
+
+
 // =============================
 // ADMIN - Layanan Bantuan Chat
 // =============================
@@ -157,6 +153,25 @@ Route::middleware('auth')
         Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
             ->name('bantuan.reply');
     });
+
+
+
+    
+// =============================
+// Auth Profile
+// =============================
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
+
+
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
 // Ambil komentar
 Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
 
