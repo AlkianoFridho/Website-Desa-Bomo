@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
+use App\Models\Organisasi; // Tambahkan import model Organisasi
 
 class HomeController extends Controller
 {
@@ -18,9 +19,9 @@ class HomeController extends Controller
     public function userview()
     {
         $pengaduan = Pengaduan::latest()->paginate(10);
-        return view('user.home', compact('pengaduan'));
+        // Ambil data organisasi untuk ditampilkan di home
+        $organisasi = Organisasi::all(); 
+        
+        return view('user.home', compact('pengaduan', 'organisasi'));
     }
-
-    // Halaman beranda tanpa login (guest)
-   
 }

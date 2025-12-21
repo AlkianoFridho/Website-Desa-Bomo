@@ -152,34 +152,32 @@
         <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Komitmen kami untuk pengelolaan dana yang terbuka dan akuntabel.</p>
     </div>
 
-    <div class="max-w-4xl mx-auto bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-8 shadow-2xl border-t-8 border-emerald-600" data-aos="zoom-in-up" data-aos-delay="300">
-        <div class="bg-emerald-600 text-white p-4 rounded-t-lg mb-6 shadow-md">
-             <p class="text-xl font-bold uppercase tracking-wider">Anggaran Total 2025</p>
-             <p class="text-4xl font-extrabold mt-1">Rp 1.2 Miliar</p>
-        </div>
+<!-- Struktur Organisasi -->
+<section class="py-24 bg-white relative overflow-hidden" data-aos="fade-up">
+    <div class="container mx-auto px-6 text-center relative z-10">
+        
+        <h2 class="text-4xl font-bold text-green-700 mb-4 uppercase">Struktur Organisasi</h2>
+        <div class="w-20 h-1.5 bg-green-500 mx-auto rounded-full mb-10"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @php
-                $budgets = [
-                    ['label' => 'Infrastruktur', 'percent' => 40, 'color' => 'emerald'],
-                    ['label' => 'Pendidikan', 'percent' => 30, 'color' => 'indigo'],
-                    ['label' => 'Kesehatan', 'percent' => 20, 'color' => 'rose'],
-                    ['label' => 'Lain-lain', 'percent' => 10, 'color' => 'amber'],
-                ];
-            @endphp
+        <p class="text-gray-600 max-w-3xl mx-auto mb-16 text-lg leading-relaxed italic">
+            "Tata kelola pemerintahan Desa Bomo dijalankan oleh perangkat desa yang berdedikasi tinggi, transparan, dan akuntabel dalam setiap fungsi pelayanan publik."
+        </p>
 
-            @foreach ($budgets as $i => $b)
-            <div class="p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-[1.02]" data-aos="fade-up" data-aos-delay="{{ 400 + ($i * 100) }}">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-lg font-semibold text-gray-800">{{ $b['label'] }}</span>
-                    <span class="text-xl font-extrabold text-{{ $b['color'] }}-600">{{ $b['percent'] }}%</span>
+        <div class="flex flex-col items-center space-y-12 mb-16">
+            @foreach($organisasi->where('jabatan', 'Kepala Desa')->take(1) as $kades)
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    @include('user.infografis._card_organisasi', ['anggota' => $kades, 'size' => 'medium'])
                 </div>
-                <div class="h-2 mb-2 flex rounded-full bg-gray-200">
-                    <div style="width:{{ $b['percent'] }}%" class="shadow-none flex flex-col text-center whitespace-nowrap justify-center bg-{{ $b['color'] }}-600 rounded-full transition-all duration-1000 ease-out"></div>
-                </div>
-            </div>
             @endforeach
         </div>
+
+        <a href="{{ route('organisasi') }}" 
+           class="inline-flex items-center px-10 py-4 border-2 border-green-600 text-green-700 font-bold rounded-2xl hover:bg-green-600 hover:text-white transition-all duration-300 group">
+            <span>Lihat Struktur Selengkapnya</span>
+            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+        </a>
     </div>
 </section>
 
@@ -189,24 +187,5 @@
         <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Struktur kepemimpinan yang profesional dan berintegritas melayani masyarakat.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
-        @php
-            $officials = [
-                ['name' => 'Bapak Ahmad Syaifullah', 'position' => 'Kepala Desa', 'img_url' => 'https://i.pravatar.cc/150?img=68', 'focus' => 'Visioner & Penggerak'],
-                ['name' => 'Ibu Rina Wati', 'position' => 'Sekretaris Desa', 'img_url' => 'https://i.pravatar.cc/150?img=47', 'focus' => 'Administrasi & Akuntabilitas'],
-                ['name' => 'Bapak Mulyadi', 'position' => 'Bendahara', 'img_url' => 'https://i.pravatar.cc/150?img=60', 'focus' => 'Pengelola Keuangan Desa'],
-            ];
-        @endphp
-
-        @foreach ($officials as $i => $official)
-        <div class="group p-6 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition duration-500 transform hover:translate-y-[-8px] border-t-8 border-yellow-600/50" data-aos="flip-up" data-aos-delay="{{ 100 + ($i * 150) }}">
-            <img class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-emerald-600 object-cover grayscale group-hover:grayscale-0 transition duration-500" src="{{ $official['img_url'] }}" alt="{{ $official['name'] }}">
-            <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ $official['name'] }}</h3>
-            <p class="text-lg text-yellow-700 font-semibold uppercase tracking-wider mb-3">{{ $official['position'] }}</p>
-            <span class="inline-block mt-2 text-sm text-gray-600 bg-gray-200 px-4 py-1 rounded-full border border-gray-300">{{ $official['focus'] }}</span>
-        </div>
-        @endforeach
-    </div>
-</section>
 
 @endsection

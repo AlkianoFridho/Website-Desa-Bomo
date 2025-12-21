@@ -79,6 +79,54 @@ Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])->name(
 Route::get('/dashboard', fn() => view('admin.dashboard'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+// ambil semua chat berdasarkan session_id (AJAX polling)
+Route::get('/bantuan/chat/fetch', [BantuanChatController::class, 'fetch'])
+    ->name('bantuan.chat.fetch');
+
+
+// 👉 Mengakhiri sesi chat
+Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
+    ->name('bantuan.chat.end');
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
+
+Route::get('/wisata', function () {
+    return view('user.wisata');
+})->name('wisata');
+
+Route::get('/perikanan', function () {
+    return view('user.perikanan');
+})->name('perikanan');
+
+Route::get('/pertanian', function () {
+    return view('user.pertanian');
+})->name('pertanian');
+
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/bantuan/chat/messages', [BantuanChatController::class, 'messages'])
+    ->name('bantuan.chat.messages');
+
+
+// =============================
+// ADMIN - Layanan Bantuan Chat
+// =============================
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN Routes (WAJIB LOGIN)
+|--------------------------------------------------------------------------
+*/
 
 // Semua route admin wajib login
 Route::middleware('auth')
@@ -110,11 +158,89 @@ Route::middleware('auth')
         Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])->name('bantuan.reply');
     });
 
+
+
+    
+// =============================
+// Auth Profile
+// =============================
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
+
+
+
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
+// Ambil komentar
+Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
+
+
 /*
 |--------------------------------------------------------------------------
 | ======================== PROFILE =========================
 |--------------------------------------------------------------------------
 */
+
+Route::get('/bantuan', [BantuanController::class, 'index'])
+    ->name('user.bantuan');
+
+Route::post('/bantuan/start', [BantuanChatController::class, 'start'])
+    ->name('bantuan.start');
+
+Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
+    ->name('bantuan.chat.view');
+
+Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
+    ->name('bantuan.chat.send');
+
+
+// =============================
+// Sektor Infografis & Potensi Desa
+// =============================
+Route::prefix('infografis')->group(function () {
+    
+    // Halaman Utama Infografis
+    Route::get('/', function () {
+        return view('user.infografis.index-infografis');
+    })->name('infografis');
+
+    // Detail Potensi Wisata
+    Route::get('/wisata', function () {
+        return view('user.infografis.wisata');
+    })->name('wisata');
+
+    // Detail Potensi Perikanan
+    Route::get('/perikanan', function () {
+        return view('user.infografis.perikanan');
+    })->name('perikanan');
+
+    // Detail Potensi Pertanian
+    Route::get('/pertanian', function () {
+        return view('user.infografis.pertanian');
+    })->name('pertanian');
+    
+});
+
+// 📌 Bantuan
+// Akhiri chat
+Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
+
+Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
+    ->name('bantuan.rating');
+
+
+/*
+|--------------------------------------------------------------------------
+| Auth Profile
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
