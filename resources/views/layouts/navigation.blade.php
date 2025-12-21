@@ -12,20 +12,20 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <!-- Dashboard selalu tampil -->
+                    <!-- Dashboard -->
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
                     @auth
-
-                        @if(auth()->user()->role === 'admin')
+                        @if (auth()->user()->role === 'admin')
+                            {{-- ADMIN MENU --}}
                             <x-nav-link :href="route('admin.profil-desa.index')"
                                 :active="request()->routeIs('admin.profil-desa.*')">
                                 {{ __('Profil Desa') }}
                             </x-nav-link>
 
-                            <x-nav-link :href="route('berita.index')" :active="request()->routeIs('berita.*')">
+                            <x-nav-link :href="route('admin.berita.index')" :active="request()->routeIs('admin.berita.*')">
                                 {{ __('Berita') }}
                             </x-nav-link>
 
@@ -115,16 +115,15 @@
             </x-responsive-nav-link>
 
             @auth
-
-                @if(auth()->user()->role === 'admin')
+                @if (auth()->user()->role === 'admin')
                     <x-responsive-nav-link :href="route('admin.profil-desa.index')"
                         :active="request()->routeIs('admin.profil-desa.*')">
                         {{ __('Profil Desa') }}
                     </x-responsive-nav-link>
 
-                    <x-nav-link :href="route('berita.index')" :active="request()->routeIs('berita.*')">
+                    <x-responsive-nav-link :href="route('admin.berita.index')" :active="request()->routeIs('admin.berita.*')">
                         {{ __('Berita') }}
-                    </x-nav-link>
+                    </x-responsive-nav-link>
 
                     <x-responsive-nav-link :href="route('admin.informasi-publik.index')"
                         :active="request()->routeIs('admin.informasi-publik.*')">
