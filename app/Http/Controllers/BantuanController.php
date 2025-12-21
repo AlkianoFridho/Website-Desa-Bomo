@@ -13,16 +13,12 @@ class BantuanController extends Controller
 
     public function start(Request $request)
     {
-        // kategori dipilih user
         $request->validate([
             'kategori' => 'required'
         ]);
 
-        // simpan kategori ke session
         session(['bantuan_kategori' => $request->kategori]);
 
-        // redirect ke halaman chat
-        return redirect()->route('bantuan.chat');
+        return redirect()->route('bantuan.chat.view');
     }
-
 }

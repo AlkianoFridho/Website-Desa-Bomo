@@ -4,50 +4,77 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BantuanMessage;
+use Illuminate\Support\Str;
 
 class BantuanChatController extends Controller
 {
     public function start(Request $request)
     {
-        // kategori dipilih user
-        $request->validate([
-            'kategori' => 'required'
+        $request->validate(['kategori' => 'required']);
+
+        $sessionId = (string) Str::uuid();
+
+        session([
+            'bantuan_session_id' => $sessionId,
+            'bantuan_kategori'   => $request->kategori,
         ]);
 
-        session(['bantuan_kategori' => $request->kategori]);
+        BantuanMessage::create([
+            'session_id' => $sessionId,
+            'sender'     => 'user',
+            'message'    => 'Memulai percakapan',
+            'kategori'   => $request->kategori,
+        ]);
 
         return redirect()->route('bantuan.chat.view');
     }
 
+    public function chatView()
+    {
+        if (!session('bantuan_session_id')) {
+            return redirect()->route('user.bantuan');
+        }
+
+        return view('user.bantuan-chat', [
+            'session_id' => session('bantuan_session_id'),
+            'kategori'   => session('bantuan_kategori'),
+        ]);
+    }
+
     public function send(Request $request)
     {
-        $request->validate([
-            'message' => 'required'
-        ]);
+        $request->validate(['message' => 'required']);
 
-        // simpan pesan user
         BantuanMessage::create([
-            'sender' => 'user',
-            'message' => $request->message
+            'session_id' => session('bantuan_session_id'),
+            'sender'     => 'user',
+            'message'    => $request->message,
+            'kategori'   => session('bantuan_kategori'),
         ]);
 
-        // admin akan membalas lewat dashboard
         return response()->json(['status' => 'sent']);
     }
 
-    public function chatView()
+    // 🔥 AMBIL CHAT (USER & ADMIN)
+    public function fetch()
     {
-        $kategori = session('bantuan_kategori');
+        $sessionId = session('bantuan_session_id');
 
-        if (!$kategori) {
-            return redirect()->route('user.bantuan')->with('error', 'Pilih kategori dahulu!');
+        if (! $sessionId) {
+            return response()->json([]);
         }
 
-        return view('user.bantuan-chat', compact('kategori'));
+        $messages = BantuanMessage::where('session_id', $sessionId)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return response()->json($messages);
     }
+
 
     public function end()
     {
+        session()->forget(['bantuan_session_id', 'bantuan_kategori']);
         return response()->json(['status' => 'ended']);
     }
 }

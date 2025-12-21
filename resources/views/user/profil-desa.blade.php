@@ -5,6 +5,7 @@
 <section class="relative w-full h-[400px] md:h-[500px] overflow-hidden">
     <img 
         src="https://upload.wikimedia.org/wikipedia/commons/6/64/Kantordesabomorogojampibanyuwangi.JPG"
+        class="w-full h-full object-cover scale-[1.05] brightness-[0.70]"
         alt="Kantor Desa Bomo"
         class="w-full h-full object-cover"
     >
