@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Panduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Comment;
+
 
 class PanduanController extends Controller
 {
@@ -16,8 +18,11 @@ class PanduanController extends Controller
         $panduans = Panduan::latest()->get();
         $mainVideo = Panduan::latest()->first(); // gunakan video pertama
         $recommended = Panduan::skip(1)->take(4)->get(); // ambil 4 video selain video utama
+           $comments = ($mainVideo)
+        ? Comment::where('panduan_id', $mainVideo->id)->latest()->get()
+        : collect();
 
-        return view('user.panduan', compact('panduans', 'mainVideo', 'recommended'));
+        return view('user.panduan', compact('panduans', 'mainVideo', 'recommended','comments'));
     }
 
     public function show($id)
@@ -26,8 +31,8 @@ class PanduanController extends Controller
 
     // Ambil rekomendasi selain video yang dipilih
     $recommended = Panduan::where('id', '!=', $id)->take(4)->get();
-
-    return view('user.panduan', compact('mainVideo', 'recommended'));
+    $comments = Comment::where('panduan_id', $id)->latest()->get();
+    return view('user.panduan', compact('mainVideo', 'recommended','comments'));
 }
 
 // ➕ Tambahan hitung views
@@ -128,4 +133,6 @@ public function addView($id)
 
         return back()->with('success', 'Panduan berhasil dihapus!');
     }
+    
+
 }

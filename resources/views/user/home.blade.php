@@ -1,146 +1,212 @@
 @extends('layouts.appuser')
 
 @section('content')
-
-
-
-<!-- Hero Section () -->
-<section class="relative w-full h-[600px] overflow-x-hidden hidden md:block">
+<section class="relative w-full h-[85vh] min-h-[700px] overflow-hidden hidden md:block">
     <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
         <source src="{{ asset('assets/BOMO KU BUMI KU.mp4') }}" type="video/mp4">
     </video>
 
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-black/50 to-transparent z-10"></div>
 
-    <!-- Text -->
-    <div class="relative z-20 flex items-center justify-center h-full px-4 text-center">
-        <div class="text-white max-w-3xl" data-aos="fade-up">
-            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Selamat Datang di Desa Bomo</h1>
-            <p class="text-lg md:text-xl opacity-90">
-                Desa Bomo, permata Kecamatan Rogojampi, Banyuwangi.
+    <div class="relative z-20 flex flex-col items-center justify-center h-full px-8 text-center">
+        <div class="text-white max-w-5xl" 
+             data-aos="fade-up" 
+             data-aos-duration="1500" 
+             data-aos-easing="ease-out-quad">
+            
+            <p class="text-xl font-medium italic mb-3 tracking-widest uppercase opacity-80" 
+               data-aos="fade-up" data-aos-delay="200">Selamat Datang di</p>
+            
+            <h1 class="text-6xl lg:text-8xl font-extrabold leading-tight mb-6 tracking-tight drop-shadow-lg" 
+                style="text-shadow: 2px 2px 10px rgba(0,0,0,0.8);"
+                data-aos="fade-up" data-aos-delay="400">
+                Desa Bomo
+            </h1>
+            
+            <p class="text-2xl font-light opacity-95 mb-10"
+               data-aos="fade-up" data-aos-delay="600">
+                Gerbang Keindahan Alam dan Kearifan Lokal Banyuwangi.
             </p>
 
             <a href="#profil-home"
-               class="inline-block mt-6 px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-300">
-               Jelajahi Desa
+               class="inline-flex items-center mt-6 px-12 py-4 text-xl bg-yellow-600/90 hover:bg-yellow-700 rounded-full text-white font-bold shadow-2xl shadow-yellow-800/50 transition duration-500 ease-in-out transform hover:scale-110 hover:ring-4 ring-yellow-400 ring-offset-4 ring-offset-gray-900"
+               data-aos="zoom-in" data-aos-delay="800">
+               <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+               Jelajahi Pesona Kami
             </a>
         </div>
     </div>
 </section>
 
 
-<!-- Hero Mobile () -->
-<section class="md:hidden bg-gradient-to-b from-green-700 to-green-900 text-white py-16 px-6">
-    <h1 class="text-3xl font-bold text-center mb-6">Selamat Datang di Desa Bomo</h1>
-    <p class="text-center text-sm mb-8 opacity-90">
-        Desa dengan budaya, sejarah, dan kekayaan alam yang asri.
+<section class="md:hidden bg-gradient-to-br from-emerald-800 to-green-900 text-white py-16 px-6 shadow-xl">
+    <h1 class="text-4xl font-extrabold text-center mb-4" data-aos="fade-down">Desa Bomo</h1>
+    <p class="text-center text-md mb-8 opacity-90" data-aos="fade-down" data-aos-delay="100">
+        Warisan budaya dan keindahan alam Rogojampi.
     </p>
 
     <div class="grid grid-cols-2 gap-4">
         <a href="{{ route('profil-desa') }}"
-           class="bg-white text-green-700 font-semibold p-4 rounded-xl text-center shadow-md border border-green-600 hover:bg-green-100 transition">
-            Profil Desa
+           class="flex flex-col items-center justify-center bg-white text-emerald-800 font-bold p-4 rounded-xl shadow-lg border-b-4 border-yellow-600 hover:bg-gray-100 transition transform hover:scale-[1.05]" data-aos="zoom-in" data-aos-delay="200">
+           <svg class="w-7 h-7 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-5 0H5m14 0h-2M5 21h2m0-9h2m4 0h2"></path></svg>
+           <span class="text-sm">Profil Desa</span>
         </a>
 
-        <a href="{{ route('infografis') }}" 
-class="bg-white text-green-700 font-semibold p-4 rounded-xl text-center shadow-md border border-green-600 hover:bg-green-100 transition">
-   Infografis
-</a>
-
+        <a href="{{ route('infografis') }}"
+           class="flex flex-col items-center justify-center bg-white text-emerald-800 font-bold p-4 rounded-xl shadow-lg border-b-4 border-yellow-600 hover:bg-gray-100 transition transform hover:scale-[1.05]" data-aos="zoom-in" data-aos-delay="300">
+            <svg class="w-7 h-7 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+            <span class="text-sm">Infografis</span>
+        </a>
     </div>
 </section>
 
 
-<!-- Profil Desa -->
-<section id="profil-home" class="py-16 bg-white" data-aos="fade-up">
-    <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-        <!-- Logo Desa -->
-        <div class="flex justify-center" data-aos="fade-right">
-            <img src="{{ asset('assets/banyuwangi.png') }}" alt="Logo Desa Bomo" class="w-60 h-auto object-contain">
-        </div>
-
-        <!-- Konten Profil -->
-        <div class="md:col-span-2" data-aos="fade-left">
-            <h2 class="text-3xl font-bold text-green-700 mb-4">Profil Desa Bomo</h2>
-            <p class="text-gray-700 leading-relaxed">
-                Terletak di Kecamatan Rogojampi, Kabupaten Banyuwangi, <strong>Desa Bomo</strong> memiliki sejarah yang kaya serta kekayaan budaya yang menjadikannya salah satu desa yang harmonis dan damai. 
-                <br><br>
-                Desa ini dikenal dengan kehidupan masyarakat yang rukun, potensi wisata bahari dan pegunungan, serta berbagai kegiatan adat yang masih lestari. Lingkungannya yang asri menjadikan Bomo tempat ideal untuk edukasi budaya dan rekreasi keluarga.
+<section id="profil-home" class="py-24 bg-gray-50 overflow-hidden">
+    <div class="max-w-screen-xl mx-auto px-8 grid grid-cols-1 md:grid-cols-5 gap-16 items-center">
+        <div class="md:col-span-3 order-2 md:order-1" data-aos="fade-right" data-aos-duration="1200">
+            <span class="text-sm font-semibold uppercase text-yellow-700 block mb-2 tracking-widest">Kearifan Lokal</span>
+            <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-6 border-b border-gray-300 pb-4">Desa Bomo: Sebuah Warisan</h2>
+            <p class="text-gray-700 leading-relaxed text-lg mb-6">
+                Terletak di Kecamatan Rogojampi, Kabupaten Banyuwangi, *Desa Bomo* adalah perpaduan harmonis antara kearifan lokal dan kemajuan. Sejarahnya yang kaya membentuk masyarakat yang rukun, damai, dan menjunjung tinggi nilai-nilai adat.
             </p>
+            <blockquote class="text-gray-600 leading-relaxed italic border-l-4 border-emerald-600 pl-6 py-3 bg-white shadow-lg rounded-r-lg hover:shadow-xl transition duration-300">
+                 "Desa ini dikenal dengan kehidupan masyarakat yang rukun, potensi wisata bahari dan pegunungan, serta berbagai kegiatan adat yang masih lestari."
+            </blockquote>
+            <a href="{{ route('profil-desa') }}" class="inline-flex items-center mt-8 text-emerald-700 font-bold text-lg hover:text-emerald-900 transition transform hover:translate-x-2">
+                Jelajahi Sejarah Kami
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+        </div>
+        
+        <div class="md:col-span-2 order-1 md:order-2 flex flex-col items-center justify-center space-y-6" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="300">
+            <img src="{{ asset('assets/banyuwangi.png') }}" alt="Lambang Desa Bomo" class="w-full max-w-sm h-auto object-contain p-8 bg-white rounded-3xl shadow-2xl border-4 border-emerald-600/50 hover:scale-105 transition duration-500">
+            <span class="inline-block bg-emerald-600 text-white text-md font-bold px-6 py-2 rounded-full tracking-wider uppercase shadow-lg shadow-emerald-700/40">
+                Desa Bomo, Rogojampi
+            </span>
         </div>
     </div>
 </section>
 
-<!-- Berita Terbaru -->
-<section class="container mx-auto px-6 py-16 bg-gray-50" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-green-700 text-center mb-10">Berita Terbaru</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+<section class="container mx-auto px-8 py-20 bg-white overflow-hidden">
+    <div class="text-center mb-14" data-aos="fade-up">
+        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">📰 Berita & Pengumuman Terbaru</h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Informasi terkini dari kantor desa, event budaya, dan kemajuan pembangunan.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         @foreach(range(1, 3) as $i)
-        <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition" data-aos="zoom-in" data-aos-delay="{{ $i * 100 }}">
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">Judul Berita {{ $i }}</h3>
-            <p class="text-gray-600 mb-4">Ringkasan berita terbaru desa...</p>
-            <a href="#" class="text-green-600 hover:text-green-800 font-medium transition-colors">Baca Selengkapnya →</a>
+        <div class="bg-gray-50 rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition duration-500 group overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $i * 200 }}">
+            <div class="relative overflow-hidden">
+                 <img src="https://picsum.photos/400/250?random={{ $i + 10 }}" alt="Gambar Berita {{ $i }}" class="w-full h-52 object-cover transition duration-700 transform group-hover:scale-110">
+                 <div class="absolute bottom-0 right-0 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-tl-lg">
+                    {{ date('d F Y', strtotime('-' . $i . ' days')) }}
+                 </div>
+            </div>
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-emerald-700 transition">{{ 'Judul Berita Progresif ' . $i }}</h3>
+                <p class="text-gray-600 mb-4 line-clamp-3 text-base">Ringkasan singkat yang ditulis dengan baik, menyoroti dampak dan relevansi berita bagi masyarakat Desa Bomo.</p>
+                <a href="#" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                    Baca Selengkapnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                </a>
+            </div>
         </div>
         @endforeach
     </div>
 </section>
 
-<!-- Agenda Desa -->
-<section class="container mx-auto px-6 py-16 bg-white text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-green-700 mb-6">Agenda Desa</h2>
-    <div class="max-w-2xl mx-auto bg-gray-100 rounded-xl p-6 shadow">
-        <ul class="text-gray-700 space-y-4 text-lg">
-            <li class="flex justify-between items-center">
-                <span>📅 Rapat Perencanaan Pembangunan</span> 
-                <span class="text-sm text-gray-500">10 Maret 2025</span>
+<section class="container mx-auto px-8 py-20 bg-gradient-to-t from-gray-100 to-gray-50 text-center overflow-hidden">
+    <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">📌 Jadwal Agenda Desa</h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Pastikan Anda tidak ketinggalan acara penting dan partisipasi masyarakat.</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+        <ol class="relative border-l border-gray-300">
+            @php
+                $agendas = [
+                    ['title' => 'Rapat Perencanaan Pembangunan', 'date' => '10 Maret 2025', 'desc' => 'Musyawarah desa untuk menentukan arah pembangunan tahunan.'],
+                    ['title' => 'Pelatihan Pertanian Organik', 'date' => '15 Maret 2025', 'desc' => 'Program peningkatan kapasitas petani menuju praktik berkelanjutan.'],
+                    ['title' => 'Lomba Bersih Desa & Gotong Royong', 'date' => '20 Maret 2025', 'desc' => 'Kegiatan rutin untuk menjaga keindahan dan kebersihan lingkungan desa.'],
+                ];
+            @endphp
+
+            @foreach ($agendas as $i => $item)
+            <li class="mb-10 ml-8" data-aos="fade-left" data-aos-delay="{{ 300 + ($i * 200) }}">
+                <span class="absolute flex items-center justify-center w-6 h-6 bg-emerald-600 rounded-full -left-3 ring-8 ring-gray-50/70 shadow-lg">
+                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                </span>
+                <h3 class="flex items-center mb-1 text-xl font-semibold text-gray-900">{{ $item['title'] }}</h3>
+                <time class="block mb-2 text-sm font-normal leading-none text-emerald-600">{{ $item['date'] }}</time>
+                <p class="text-base font-normal text-gray-700 bg-white p-4 rounded-lg shadow-xl hover:shadow-2xl transition duration-300">{{ $item['desc'] }}</p>
             </li>
-            <li class="flex justify-between items-center">
-                <span>🌱 Pelatihan Pertanian Organik</span>
-                <span class="text-sm text-gray-500">15 Maret 2025</span>
-            </li>
-            <li class="flex justify-between items-center">
-                <span>🎉 Lomba Bersih Desa</span>
-                <span class="text-sm text-gray-500">20 Maret 2025</span>
-            </li>
-        </ul>
+            @endforeach
+        </ol>
     </div>
 </section>
 
-<!-- Transparansi Keuangan -->
-<section class="container mx-auto px-6 py-16 bg-gray-50 text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-green-700 mb-6">Transparansi Keuangan</h2>
-    <p class="text-lg text-gray-700">💰 <strong>Anggaran 2025:</strong> Rp 1.200.000.000</p>
-    <div class="flex justify-center flex-wrap gap-4 mt-6">
-        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full">Infrastruktur (40%)</span>
-        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full">Pendidikan (30%)</span>
-        <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full">Kesehatan (20%)</span>
-        <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full">Lain-lain (10%)</span>
+<section class="container mx-auto px-8 py-20 bg-white text-center overflow-hidden">
+    <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">📊 Transparansi Anggaran Desa</h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Komitmen kami untuk pengelolaan dana yang terbuka dan akuntabel.</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-8 shadow-2xl border-t-8 border-emerald-600" data-aos="zoom-in-up" data-aos-delay="300">
+        <div class="bg-emerald-600 text-white p-4 rounded-t-lg mb-6 shadow-md">
+             <p class="text-xl font-bold uppercase tracking-wider">Anggaran Total 2025</p>
+             <p class="text-4xl font-extrabold mt-1">Rp 1.2 Miliar</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @php
+                $budgets = [
+                    ['label' => 'Infrastruktur', 'percent' => 40, 'color' => 'emerald'],
+                    ['label' => 'Pendidikan', 'percent' => 30, 'color' => 'indigo'],
+                    ['label' => 'Kesehatan', 'percent' => 20, 'color' => 'rose'],
+                    ['label' => 'Lain-lain', 'percent' => 10, 'color' => 'amber'],
+                ];
+            @endphp
+
+            @foreach ($budgets as $i => $b)
+            <div class="p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-[1.02]" data-aos="fade-up" data-aos-delay="{{ 400 + ($i * 100) }}">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-lg font-semibold text-gray-800">{{ $b['label'] }}</span>
+                    <span class="text-xl font-extrabold text-{{ $b['color'] }}-600">{{ $b['percent'] }}%</span>
+                </div>
+                <div class="h-2 mb-2 flex rounded-full bg-gray-200">
+                    <div style="width:{{ $b['percent'] }}%" class="shadow-none flex flex-col text-center whitespace-nowrap justify-center bg-{{ $b['color'] }}-600 rounded-full transition-all duration-1000 ease-out"></div>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
 </section>
 
-<!-- Struktur Organisasi -->
-<section class="container mx-auto px-6 py-16 bg-white text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-green-700 mb-10">Struktur Organisasi</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="100">
-            <h3 class="font-semibold text-gray-800">Kepala Desa</h3>
-            <p class="text-gray-600">Bapak Ahmad Syaifullah</p>
+<section class="container mx-auto px-8 py-20 bg-gray-100 text-center overflow-hidden">
+    <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">👨‍💼 Aparatur Pemerintah Desa Bomo</h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Struktur kepemimpinan yang profesional dan berintegritas melayani masyarakat.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+        @php
+            $officials = [
+                ['name' => 'Bapak Ahmad Syaifullah', 'position' => 'Kepala Desa', 'img_url' => 'https://i.pravatar.cc/150?img=68', 'focus' => 'Visioner & Penggerak'],
+                ['name' => 'Ibu Rina Wati', 'position' => 'Sekretaris Desa', 'img_url' => 'https://i.pravatar.cc/150?img=47', 'focus' => 'Administrasi & Akuntabilitas'],
+                ['name' => 'Bapak Mulyadi', 'position' => 'Bendahara', 'img_url' => 'https://i.pravatar.cc/150?img=60', 'focus' => 'Pengelola Keuangan Desa'],
+            ];
+        @endphp
+
+        @foreach ($officials as $i => $official)
+        <div class="group p-6 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition duration-500 transform hover:translate-y-[-8px] border-t-8 border-yellow-600/50" data-aos="flip-up" data-aos-delay="{{ 100 + ($i * 150) }}">
+            <img class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-emerald-600 object-cover grayscale group-hover:grayscale-0 transition duration-500" src="{{ $official['img_url'] }}" alt="{{ $official['name'] }}">
+            <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ $official['name'] }}</h3>
+            <p class="text-lg text-yellow-700 font-semibold uppercase tracking-wider mb-3">{{ $official['position'] }}</p>
+            <span class="inline-block mt-2 text-sm text-gray-600 bg-gray-200 px-4 py-1 rounded-full border border-gray-300">{{ $official['focus'] }}</span>
         </div>
-        <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="200">
-            <h3 class="font-semibold text-gray-800">Sekretaris Desa</h3>
-            <p class="text-gray-600">Ibu Rina Wati</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="300">
-            <h3 class="font-semibold text-gray-800">Bendahara</h3>
-            <p class="text-gray-600">Bapak Mulyadi</p>
-        </div>
+        @endforeach
     </div>
 </section>
-
-
-
 
 @endsection
-
-

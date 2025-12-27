@@ -1,9 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+
+/*
+|--------------------------------------------------------------------------
+| Controllers
+|--------------------------------------------------------------------------
+*/
 
 // User Controllers
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\ProfilDesaController;
 use App\Http\Controllers\InformasiPublikController;
 use App\Http\Controllers\OrganisasiController;
@@ -13,55 +21,81 @@ use App\Http\Controllers\BantuanController;
 use App\Http\Controllers\BantuanChatController;
 use App\Http\Controllers\BantuanRatingController;
 use App\Http\Controllers\AdminBantuanController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\BeritaController;
 
-// =============================
-// User Page Routes
-// =============================
+
+/*
+|--------------------------------------------------------------------------
+| User Page Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', function () {
-    return view('user.home');
-})->name('home');
+    return view('onboarding.welcome');
+})->name('welcome');
 
+// Onboarding
+Route::get('/home', [HomeController::class, 'userview'])->name('home');
+Route::get('/tutorial', [OnboardingController::class, 'showTutorial'])->name('onboarding.tutorial');
+Route::get('/completion', [OnboardingController::class, 'showCompletion'])->name('onboarding.completion');
+
+// Informasi Desa
 Route::get('/profil-desa', [ProfilDesaController::class, 'showUserView'])->name('profil-desa');
 Route::get('/informasi-publik', [InformasiPublikController::class, 'showUserView'])->name('informasi');
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
+
+// Pengaduan
 Route::get('/pengaduan', [PengaduanController::class, 'showUserView'])->name('pengaduan');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
-Route::get('/bantuan', [BantuanController::class, 'index'])->name('user.bantuan');
 
-
-// 👉 Halaman Panduan di sisi User
+// Panduan User
 Route::get('/panduan', [PanduanController::class, 'showUserView'])->name('panduan.user');
 Route::get('/panduan/{id}', [PanduanController::class, 'show'])->name('user.panduan.show');
-Route::post('/panduan/{id}/view', [PanduanController::class, 'addView'])
-    ->name('panduan.addView');
-// =============================
-// Dashboard
-// =============================
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/panduan/{id}/view', [PanduanController::class, 'addView'])->name('panduan.addView');
+
+// Komentar Panduan
+Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
+Route::post('/panduan/comment', [CommentController::class, 'store'])->name('comments.store');
 
 
-// =============================
-// ADMIN Routes (Wajib Login!!)
-// =============================
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+/*
+|--------------------------------------------------------------------------
+| Berita Desa (USER)
+|--------------------------------------------------------------------------
+*/
 
-    // Profil Desa
-    Route::resource('profil-desa', ProfilDesaController::class)->except(['show']);
+Route::get('/berita', [BeritaController::class, 'userIndex'])
+    ->name('berita.index');
 
-    // Informasi Publik
-    Route::resource('informasi-publik', InformasiPublikController::class);
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])
+    ->name('berita.show');
+ 
 
-    // Struktur Organisasi
-    Route::resource('organisasi', OrganisasiController::class);
+/*
+|--------------------------------------------------------------------------
+| Halaman Tambahan User
+|--------------------------------------------------------------------------
+*/
 
-    // Pengaduan
-    Route::resource('pengaduan', PengaduanController::class)->only(['index', 'edit', 'update']);
+// 👉 Ambil pesan (AJAX polling)
 
-    // 🔥 Panduan (CRUD)
-    Route::resource('panduan', PanduanController::class);
-});
+    ->name('bantuan.chat.end');
+Route::get('/infografis', function () {
+    return view('user.infografis');
+})->name('infografis');
+
+Route::get('/wisata', function () {
+    return view('user.wisata');
+})->name('wisata');
+
+Route::get('/perikanan', function () {
+    return view('user.perikanan');
+})->name('perikanan');
+
+Route::get('/pertanian', function () {
+    return view('user.pertanian');
+})->name('pertanian');
 
 
 
@@ -112,7 +146,6 @@ Route::post('/bantuan/rating/store',
 // =============================
 // ADMIN - Layanan Bantuan Chat
 // =============================
-
 Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
@@ -127,6 +160,47 @@ Route::middleware('auth')
             ->name('bantuan.chat');
 
         // 📌 Admin membalas pesan
+        Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
+            ->name('bantuan.reply');
+    });
+/*
+|--------------------------------------------------------------------------
+| ADMIN Routes (WAJIB LOGIN)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        // Profil Desa
+        Route::resource('profil-desa', ProfilDesaController::class)->except(['show']);
+
+        // Informasi Publik
+        Route::resource('informasi-publik', InformasiPublikController::class);
+
+        // Struktur Organisasi
+        Route::resource('organisasi', OrganisasiController::class);
+
+        // Pengaduan
+        Route::resource('pengaduan', PengaduanController::class)
+            ->only(['index', 'edit', 'update']);
+
+        // Panduan
+        Route::resource('panduan', PanduanController::class);
+
+        // 🔥 Berita Desa (ADMIN CRUD)
+        Route::resource('berita', BeritaController::class)
+            ->except(['show']);
+
+        // Bantuan - Admin
+        Route::get('/bantuan', [AdminBantuanController::class, 'index'])
+            ->name('bantuan.index');
+
+        Route::get('/bantuan/chat/{session_id}', [AdminBantuanController::class, 'showChat'])
+            ->name('bantuan.chat');
+
         Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
             ->name('bantuan.reply');
     });
@@ -147,3 +221,22 @@ require __DIR__ . '/auth.php';
 Route::get('/infografis', function () {
     return view('user.infografis');
 })->name('infografis');
+// Ambil komentar
+Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Auth Profile
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
