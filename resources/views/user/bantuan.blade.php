@@ -19,7 +19,7 @@
         <h4 class="font-semibold text-green-700 mb-2 text-lg">Layanan Bantuan</h4>
 
         <div class="flex items-center gap-3 mb-3">
-            <div class="bg-green-600 text-white p-3 rounded-full">☎</div>
+            <div class="bg-green-600 text-white p-3,5 rounded-full">☎</div>
             <div class="bg-green-600 text-white p-3 rounded-full">📧</div>
             <div class="text-sm text-gray-700">
                 <div>Telp : 08123456789</div>
@@ -30,7 +30,7 @@
         {{-- Kategori Bantuan --}}
         <h4 class="font-semibold text-green-700 mt-6 text-lg">Kategori Layanan Bantuan</h4>
 
-        <div class="flex flex-col gap-3 mt-3 text-gray-700 text-sm">
+        <div class="flex flex-col gap-3 mt-3 mb-6 text-gray-700 text-sm">
             <label class="flex items-center gap-3">
                 <input type="radio" name="kategori" value="Informasi berita desa" class="kategori-radio w-5 h-5 text-green-600">
                 Informasi berita desa
@@ -67,7 +67,7 @@
 
     {{-- Jam Operasional --}}
     <div class="bg-green-50 border border-green-200 text-center p-3 rounded-md mt-4 text-sm">
-        <p class="font-semibold">Jam Operasional</p>
+        <p class="font-semibold text-green-700">Jam Operasional</p>
         <p>Senin - Minggu : 07.00 - 16.00 WIB</p>
     </div>
 
