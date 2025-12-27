@@ -10,9 +10,9 @@
         <h3 class="text-green-700 text-2xl font-semibold">Layanan Bantuan</h3>
         <p class="text-gray-600 text-sm -mt-1">Admin Bomo siap membantu</p>
 
-        {{-- ➕ Menampilkan kategori yang dipilih --}}
         <p class="text-xs text-gray-500 mt-1">
-            Kategori: <span class="font-semibold">{{ session('bantuan_kategori') }}</span>
+            Kategori:
+            <span class="font-semibold">{{ session('bantuan_kategori') }}</span>
         </p>
     </div>
 
@@ -21,151 +21,144 @@
 
         {{-- Header Chat --}}
         <div class="flex justify-between items-center pb-2 border-b">
-            <h4 class="font-semibold text-green-700">Admin Bomo</h4>
 
-            {{-- Tombol end chat --}}
+            {{-- Left : Avatar + Name --}}
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-green-600 grid place-items-center text-white">
+                    👤
+                </div>
+
+                <h4 class="font-semibold text-green-700">
+                    Admin Bomo
+                </h4>
+            </div>
+
+            {{-- End Chat Button --}}
             <form id="endChatForm">
                 @csrf
-                <button type="submit" class="text-red-500 font-bold text-xl">×</button>
+                <button
+                    type="submit"
+                    class="w-9 h-9 grid place-items-center
+                        text-red-600 font-bold text-2xl
+                        rounded-full
+                        hover:bg-red-100 hover:text-red-700
+                        hover:scale-110 transition">
+                    ✕
+                </button>
             </form>
+
         </div>
+
 
         {{-- Area Chat --}}
         <div id="chatArea" class="h-72 overflow-y-auto mt-3 space-y-3 text-sm"></div>
-        <script>
-        const chatArea = document.getElementById('chatArea');
 
-        function loadMessages() {
-            fetch("{{ route('bantuan.chat.fetch') }}")
-                .then(res => res.json())
-                .then(data => {
-                    chatArea.innerHTML = '';
-
-                    data.forEach(msg => {
-                        if (msg.sender === 'user') {
-                            chatArea.innerHTML += `
-                                <div class="flex justify-end">
-                                    <div class="bg-gray-200 p-3 rounded-lg max-w-[75%]">
-                                        ${msg.message}
-                                    </div>
-                                </div>`;
-                        } else {
-                            chatArea.innerHTML += `
-                                <div class="flex">
-                                    <div class="bg-green-600 text-white p-3 rounded-lg max-w-[75%]">
-                                        ${msg.message}
-                                    </div>
-                                </div>`;
-                        }
-                    });
-
-                    chatArea.scrollTop = chatArea.scrollHeight;
-                });
-        }
-
-        // LOAD PERTAMA
-        loadMessages();
-
-        // 🔁 POLLING TIAP 3 DETIK
-        setInterval(loadMessages, 3000);
-
-        // SEND CHAT
-        document.getElementById('chatForm').addEventListener('submit', function(e){
-            e.preventDefault();
-            let message = messageInput.value;
-            if (!message.trim()) return;
-
-            fetch("{{ route('bantuan.chat.send') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                },
-                body: JSON.stringify({ message })
-            }).then(() => {
-                messageInput.value = "";
-                loadMessages();
-            });
-        });
-
-        // END CHAT
-        document.getElementById('endChatForm').addEventListener('submit', function(e){
-            e.preventDefault();
-
-            fetch("{{ route('bantuan.chat.end') }}", {
-                method: "POST",
-                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" }
-            }).then(() => {
-                window.location.href = "/bantuan-rating";
-            });
-        });
-        </script>
-
-
-        {{-- Input Chat --}}
+        {{-- Input --}}
         <form id="chatForm" class="mt-4 flex items-center gap-2">
             @csrf
-            <input 
-                type="text" 
-                name="message" 
+            <input
+                type="text"
                 id="messageInput"
                 class="flex-1 border rounded-lg p-3 text-sm"
                 placeholder="Tuliskan pesan..."
             >
-            <button 
-                class="bg-green-600 text-white px-4 py-2 rounded-full shadow">
+            <button class="bg-green-600 text-white px-4 py-2 rounded-full shadow">
                 ➤
             </button>
         </form>
-    </div>
 
+    </div>
 </div>
 
-{{-- AJAX --}}
+{{-- SCRIPT --}}
 <script>
-document.getElementById('chatForm').addEventListener('submit', function(e){
-    e.preventDefault();
+const chatArea = document.getElementById('chatArea');
+const messageInput = document.getElementById('messageInput');
+const chatForm = document.getElementById('chatForm');
 
-    let message = document.getElementById('messageInput').value;
-    if(message.trim() === '') return;
+// Render chat dari DB
+function renderMessages(messages) {
+    chatArea.innerHTML = '';
 
-    let chatArea = document.getElementById('chatArea');
+    messages.forEach(msg => {
 
-    chatArea.innerHTML += `
-        <div class="flex justify-end">
-            <div class="bg-gray-200 p-3 rounded-lg max-w-[75%]">
-                ${message}
-            </div>
-        </div>
-    `;
-    chatArea.scrollTop = chatArea.scrollHeight;
+        // Pesan user (kanan)
+        if (msg.sender === 'user') {
+            chatArea.innerHTML += `
+                <div class="flex justify-end">
+                    <div class="bg-gray-200 px-4 py-2 rounded-2xl rounded-tr-sm max-w-[75%]">
+                        ${msg.message}
+                    </div>
+                </div>
+            `;
+        }
 
-    fetch("{{ route('bantuan.chat.send') }}", {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json", 
-            "X-CSRF-TOKEN": "{{ csrf_token() }}" 
-        },
-        body: JSON.stringify({ message })
+        // Pesan admin (kiri)
+        else {
+            chatArea.innerHTML += `
+                <div class="flex">
+                    <div class="bg-green-600 text-white px-4 py-2 rounded-2xl rounded-tl-sm max-w-[75%]">
+                        ${msg.message}
+                    </div>
+                </div>
+            `;
+        }
     });
 
-    document.getElementById('messageInput').value = "";
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+
+// Ambil chat dari server
+function fetchChat() {
+    fetch("{{ route('bantuan.chat.fetch') }}")
+        .then(res => res.json())
+        .then(data => renderMessages(data));
+}
+
+// polling tiap 2 detik
+fetchChat();
+setInterval(fetchChat, 2000);
+
+// kirim pesan
+chatForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const message = messageInput.value.trim();
+    if (!message) return;
+
+    fetch("{{ route('bantuan.chat.send') }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ message })
+    }).then(() => {
+        messageInput.value = '';
+        fetchChat();
+    });
 });
 
-// END CHAT
-document.getElementById('endChatForm').addEventListener('submit', function(e){
+// end chat
+document.getElementById('endChatForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     fetch("{{ route('bantuan.chat.end') }}", {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json", 
-            "X-CSRF-TOKEN": "{{ csrf_token() }}" 
-        },
-    }).then(() => {
-        window.location.href = "/bantuan-rating";
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.redirect) {
+            window.location.href = data.redirect;
+        } else {
+            alert('Gagal mengakhiri chat');
+        }
     });
+
 });
 </script>
-
 @endsection

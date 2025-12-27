@@ -55,6 +55,18 @@ Route::post('/panduan/comment', [CommentController::class, 'store'])->name('comm
 Route::get('/berita', [UserBeritaController::class, 'index'])->name('user.berita.index');
 Route::get('/berita/{slug}', [UserBeritaController::class, 'show'])->name('user.berita.show');
 
+/*
+|--------------------------------------------------------------------------
+| Berita Desa (USER)
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/berita', [BeritaController::class, 'userIndex'])
+    ->name('berita.index');
+
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])
+    ->name('berita.show');
+ 
 // Halaman tambahan
 Route::view('/infografis', 'user.infografis')->name('infografis');
 Route::view('/wisata', 'user.wisata')->name('wisata');
@@ -75,53 +87,72 @@ Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])->name(
 |--------------------------------------------------------------------------
 */
 
-// Dashboard
-Route::get('/dashboard', fn() => view('admin.dashboard'))
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-// ambil semua chat berdasarkan session_id (AJAX polling)
+
+
+// =============================
+// USER - BANTUAN - CHAT
+// =============================
+
+// 👉 Halaman Bantuan (pilih kategori)
+Route::get('/bantuan', [BantuanController::class, 'index'])
+    ->name('user.bantuan');
+
+// 👉 Mulai chat (buat session)
+Route::post('/bantuan/start', [BantuanChatController::class, 'start'])
+    ->name('bantuan.start');
+
+// 👉 Halaman chat
+Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
+    ->name('bantuan.chat.view');
+
+// 👉 Kirim pesan (AJAX)
+Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
+    ->name('bantuan.chat.send');
+
+// 👉 Ambil pesan (AJAX polling)
 Route::get('/bantuan/chat/fetch', [BantuanChatController::class, 'fetch'])
     ->name('bantuan.chat.fetch');
 
-
-// 👉 Mengakhiri sesi chat
+// NOTE: setelah ini redirect ke halaman rating
 Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
     ->name('bantuan.chat.end');
-Route::get('/infografis', function () {
-    return view('user.infografis');
-})->name('infografis');
-
-Route::get('/wisata', function () {
-    return view('user.wisata');
-})->name('wisata');
-
-Route::get('/perikanan', function () {
-    return view('user.perikanan');
-})->name('perikanan');
-
-Route::get('/pertanian', function () {
-    return view('user.pertanian');
-})->name('pertanian');
-
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard
+| BANTUAN - RATING (USER)
 |--------------------------------------------------------------------------
 */
+// 👉 Tampilkan halaman rating (SETELAH chat selesai)
+Route::get('/bantuan/rating/{session_id}', 
+    [BantuanRatingController::class, 'create']
+)->name('bantuan.rating.create');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/bantuan/chat/messages', [BantuanChatController::class, 'messages'])
-    ->name('bantuan.chat.messages');
+// simpan rating
+Route::post('/bantuan/rating/store', 
+    [BantuanRatingController::class, 'store']
+)->name('bantuan.rating.store');
 
 
 // =============================
 // ADMIN - Layanan Bantuan Chat
 // =============================
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
+        // 📌 Halaman daftar percakapan bantuan (group by session_id)
+        Route::get('/bantuan', [AdminBantuanController::class, 'index'])
+            ->name('bantuan.index');
+
+        // 📌 Detail chat berdasarkan session_id
+        Route::get('/bantuan/chat/{session_id}', [AdminBantuanController::class, 'showChat'])
+            ->name('bantuan.chat');
+
+        // 📌 Admin membalas pesan
+        Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
+            ->name('bantuan.reply');
+    });
 /*
 |--------------------------------------------------------------------------
 | ADMIN Routes (WAJIB LOGIN)
@@ -158,8 +189,6 @@ Route::middleware('auth')
         Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])->name('bantuan.reply');
     });
 
-
-
     
 // =============================
 // Auth Profile
@@ -186,18 +215,6 @@ Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
 | ======================== PROFILE =========================
 |--------------------------------------------------------------------------
 */
-
-Route::get('/bantuan', [BantuanController::class, 'index'])
-    ->name('user.bantuan');
-
-Route::post('/bantuan/start', [BantuanChatController::class, 'start'])
-    ->name('bantuan.start');
-
-Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
-    ->name('bantuan.chat.view');
-
-Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
-    ->name('bantuan.chat.send');
 
 
 // =============================
@@ -226,14 +243,6 @@ Route::prefix('infografis')->group(function () {
     })->name('pertanian');
     
 });
-
-// 📌 Bantuan
-// Akhiri chat
-Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])->name('bantuan.chat.end');
-
-Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])
-    ->name('bantuan.rating');
-
 
 /*
 |--------------------------------------------------------------------------
