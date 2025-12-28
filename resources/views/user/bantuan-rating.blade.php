@@ -29,19 +29,23 @@
             </h4>
 
             {{-- RATING STARS --}}
-            <div class="flex justify-center gap-2 mb-4">
-                @for($i=1;$i<=5;$i++)
-                    <button
-                        type="button"
-                        data-value="{{ $i }}"
-                        class="star hover:scale-110 transition duration-150"
-                    >
-                        <span class="text-3xl text-gray-300 hover:text-yellow-400">
-                            ★
-                        </span>
-                    </button>
-                @endfor
-            </div>
+           <div class="flex justify-center gap-2 mb-4">
+    @for($i=1;$i<=5;$i++)
+        <button
+            type="button"
+            data-value="{{ $i }}"
+            class="star"
+        >
+            <span class="star-icon text-3xl text-gray-300 select-none">
+                ★
+            </span>
+        </button>
+    @endfor
+</div>
+
+
+
+
 
 
 
@@ -53,8 +57,7 @@
                     name="komentar"
                     rows="4"
                     class="w-full mt-1 border rounded-xl p-3 text-sm focus:ring-2 focus:ring-green-400 focus:outline-none"
-                    placeholder="Tulis komentar">
-                </textarea>
+                    placeholder="Tulis komentar"></textarea>
             </div>
 
             {{-- Submit --}}
@@ -67,7 +70,7 @@
 
             {{-- Skip --}}
             <div class="text-right mt-2">
-                <a href="{{ route('home') }}" class="text-gray-500 text-sm">
+                <a href="{{ route('user.bantuan') }}" class="text-gray-500 text-sm">
                     skip
                 </a>
             </div>
@@ -77,28 +80,37 @@
 
 {{-- STAR RATING SCRIPT --}}
 <script>
-const stars = document.querySelectorAll('.star');
-const ratingValue = document.getElementById('ratingValue');
+document.addEventListener("DOMContentLoaded", function () {
+    const stars = document.querySelectorAll('.star');
+    const ratingValue = document.getElementById('ratingValue');
 
-stars.forEach(star => {
-    star.addEventListener('click', () => {
-        const value = star.getAttribute('data-value');
-        ratingValue.value = value;
+    function setStars(value){
+        stars.forEach((star, index) => {
+            const icon = star.querySelector('.star-icon');
 
-        stars.forEach(s => s.classList.remove('text-yellow-400'));
-        stars.forEach(s => s.classList.add('text-gray-300'));
+            icon.classList.remove('active');
 
-        for(let i = 0; i < value; i++){
-            stars[i].classList.remove('text-gray-300');
-            stars[i].classList.add('text-yellow-400');
-        }
+            if(index < value){
+                icon.classList.add('active');
+            }
+        });
+    }
+
+    // default = semua abu-abu
+    setStars(0);
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const value = parseInt(star.dataset.value);
+            ratingValue.value = value;
+            setStars(value);
+        });
     });
 });
-
-document.getElementById('ratingForm').addEventListener('submit', function(e){
+document.getElementById('ratingForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    if(!ratingValue.value){
+    if (!ratingValue.value) {
         alert('Silakan pilih rating terlebih dahulu');
         return;
     }
@@ -118,5 +130,18 @@ document.getElementById('ratingForm').addEventListener('submit', function(e){
     })
     .catch(() => alert('Gagal mengirim rating'));
 });
+
 </script>
+
+
+<style>
+.star-icon {
+    color: #D1D5DB; /* Tailwind gray-300 */
+}
+.star-icon.active {
+    color: #FACC15; /* Tailwind yellow-400 */
+}
+</style>
+
+
 @endsection
