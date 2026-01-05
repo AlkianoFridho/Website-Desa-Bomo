@@ -9,13 +9,12 @@
     box-sizing: border-box;
 }
 
-html, body {
-    
-    
+html,
+body {
     overflow-x: hidden; /* Hapus scroll horizontal */
     background-color: #f3f4f6;
     color: #155724;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 /* Navbar */
@@ -62,3 +61,46 @@ html, body {
     filter: contrast(180%);
 }
 
+.invert-filter {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+.big-text {
+    font-size: 1.25rem !important;
+}
+
+.high-contrast {
+    filter: contrast(1.5) brightness(1.1);
+}
+
+.accessibility-fixed {
+    position: fixed;
+    isolation: isolate;
+    z-index: 9999;
+}
+
+/* Tombol aksesibilitas benar-benar lepas dari filter body */
+.accessibility-wrapper {
+    position: fixed;
+    bottom: 1.5rem; /* 24px */
+    right: 1rem;
+    z-index: 99999;
+    filter: none !important;
+    isolation: isolate;
+    will-change: transform;
+    transform: translateZ(0); /* pastikan render di layer terpisah */
+    pointer-events: auto;
+  }
+  
+  /* Popup ikut tombol dan tetap di viewport */
+  .accessibility-popup {
+    position: fixed;
+    bottom: 5.5rem; /* sedikit di atas tombol */
+    right: 1rem;
+    z-index: 99998;
+    filter: none !important;
+    isolation: isolate;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  
