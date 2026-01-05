@@ -20,7 +20,7 @@
 
         <div class="flex items-center gap-3 mb-3">
             <div class="bg-green-600 text-white p-3,5 rounded-full">☎</div>
-            <div class="bg-green-600 text-white p-3 rounded-full">📧</div>
+            <div class="bg-green-600 text-white p-3,5 rounded-full">📧</div>
             <div class="text-sm text-gray-700">
                 <div>Telp : 08123456789</div>
                 <div>Email : csbomo@gmail.com</div>

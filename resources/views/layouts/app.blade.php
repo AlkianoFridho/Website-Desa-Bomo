@@ -18,7 +18,17 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        {{-- NAV --}}
+@auth
+    @if (auth()->user()->role === 'admin' && request()->is('admin/*'))
+        @include('layouts.admin-nav')
+    @else
         @include('layouts.navigation')
+    @endif
+@else
+    @include('layouts.navigation')
+@endauth
+
 
         <!-- Page Heading -->
         @isset($header)

@@ -29,10 +29,7 @@
                                 {{ __('Berita') }}
                             </x-nav-link>
 
-                            <x-nav-link :href="route('admin.informasi-publik.index')"
-                                :active="request()->routeIs('admin.informasi-publik.*')">
-                                {{ __('Informasi Publik') }}
-                            </x-nav-link>
+                           
 
                             <x-nav-link :href="route('admin.organisasi.index')"
                                 :active="request()->routeIs('admin.organisasi.*')">
@@ -44,11 +41,13 @@
                                 {{ __('Pengaduan') }}
                             </x-nav-link>
 
-                            <x-nav-link :href="route('admin.panduan.index')" :active="request()->routeIs('admin.panduan.*')">
+                            <x-nav-link :href="route('admin.panduan.index')"
+                                :active="request()->routeIs('admin.panduan.*')">
                                 {{ __('Panduan') }}
                             </x-nav-link>
 
-                            <x-nav-link :href="route('admin.bantuan.index')" :active="request()->routeIs('admin.bantuan.*')">
+                            <x-nav-link :href="route('admin.bantuan.index')"
+                                :active="request()->routeIs('admin.bantuan.*')">
                                 {{ __('Bantuan') }}
                             </x-nav-link>
                         @endif
@@ -91,64 +90,6 @@
                 @endauth
             </div>
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = !open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none transition">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
+          
 
-    <!-- Mobile Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-
-            @auth
-                @if (auth()->user()->role === 'admin')
-                    <x-responsive-nav-link :href="route('admin.profil-desa.index')"
-                        :active="request()->routeIs('admin.profil-desa.*')">
-                        {{ __('Profil Desa') }}
-                    </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('admin.berita.index')" :active="request()->routeIs('admin.berita.*')">
-                        {{ __('Berita') }}
-                    </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('admin.informasi-publik.index')"
-                        :active="request()->routeIs('admin.informasi-publik.*')">
-                        {{ __('Informasi Publik') }}
-                    </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('admin.organisasi.index')"
-                        :active="request()->routeIs('admin.organisasi.*')">
-                        {{ __('Struktur Organisasi') }}
-                    </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('admin.pengaduan.index')"
-                        :active="request()->routeIs('admin.pengaduan.*')">
-                        {{ __('Pengaduan') }}
-                    </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('admin.panduan.index')" :active="request()->routeIs('admin.panduan.*')">
-                        {{ __('Panduan') }}
-                    </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('admin.bantuan.index')" :active="request()->routeIs('admin.bantuan.*')">
-                        {{ __('Bantuan') }}
-                    </x-responsive-nav-link>
-                @endif
-            @endauth
-        </div>
-    </div>
 </nav>

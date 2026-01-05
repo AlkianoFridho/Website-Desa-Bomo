@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,57 +9,67 @@ class ProfilDesaController extends Controller
 {
     public function index()
     {
-
         $profildesa = ProfilDesa::first();
         return view('admin.profil-desa', compact('profildesa'));
     }
-    public function showUserView()
-{
-    $profildesa = ProfilDesa::first();
-    return view('user.profil-desa', compact('profildesa'));
-}
 
+    public function showUserView()
+    {
+        $profildesa = ProfilDesa::first();
+        return view('user.profil-desa', compact('profildesa'));
+    }
+
+    /**
+     * OPTIONAL: kalau kamu tidak mau create sama sekali, arahkan ke edit saja
+     */
     public function create()
     {
-        return view('admin.profil-desa.create');
+        $profildesa = ProfilDesa::first();
+
+        // kalau belum ada record, bikin 1 record kosong agar bisa diedit
+        if (!$profildesa) {
+            $profildesa = ProfilDesa::create([
+                'nama_desa' => '-',
+                'visi' => '-',
+                'misi' => '-',
+                'kepala_desa' => '-',
+                'lokasi' => '-',
+                'deskripsi' => '-',
+                'sejarah_singkat' => '',
+            ]);
+        }
+
+        return redirect()->route('admin.profil-desa.edit', $profildesa->id);
     }
 
+    /**
+     * OPTIONAL: store tidak dipakai lagi (biar aman tetap redirect)
+     */
     public function store(Request $request)
     {
-        ProfilDesa::create($request->validate([
-            'nama_desa' => 'required',
-            'visi' => 'required',
-            'misi' => 'required',
-            'kepala_desa' => 'required',
-            'lokasi' => 'required',
-            'deskripsi' => 'required',
-        ]));
-
-        return redirect()->route('profil-desa.index')->with('success', 'Profil desa berhasil ditambahkan!');
+        return redirect()->route('admin.profil-desa.index');
     }
 
-    public function edit(ProfilDesa $profilDesa)
+    public function edit($id)
     {
+        $profilDesa = ProfilDesa::findOrFail($id);
         return view('admin.profil-desa.edit', compact('profilDesa'));
     }
 
-    public function update(Request $request, ProfilDesa $profilDesa)
+    /**
+     * ✅ HANYA UPDATE SEJARAH
+     */
+    public function update(Request $request, $id)
     {
-        $profilDesa->update($request->validate([
-            'nama_desa' => 'required',
-            'visi' => 'required',
-            'misi' => 'required',
-            'kepala_desa' => 'required',
-            'lokasi' => 'required',
-            'deskripsi' => 'required',
-        ]));
+        $profilDesa = ProfilDesa::findOrFail($id);
 
-        return redirect()->route('profil-desa.index')->with('success', 'Profil desa diperbarui!');
-    }
+        $data = $request->validate([
+            'sejarah_singkat' => 'required|string',
+        ]);
 
-    public function destroy(ProfilDesa $profilDesa)
-    {
-        $profilDesa->delete();
-        return redirect()->route('profil-desa.index')->with('success', 'Profil desa dihapus!');
+        $profilDesa->update($data);
+
+        return redirect()->route('admin.profil-desa.index')
+            ->with('success', 'Sejarah singkat berhasil diperbarui!');
     }
 }

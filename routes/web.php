@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\ProfilDesaController;
-use App\Http\Controllers\InformasiPublikController;
+
 use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PanduanController;
@@ -15,7 +15,7 @@ use App\Http\Controllers\BantuanRatingController;
 use App\Http\Controllers\AdminBantuanController;
 use App\Http\Controllers\CommentController;
 
-// 🔹 Berita Controllers
+// ðŸ”¹ Berita Controllers
 use App\Http\Controllers\User\BeritaController as UserBeritaController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
 
@@ -35,7 +35,7 @@ Route::get('/completion', [OnboardingController::class, 'showCompletion'])->name
 
 // Informasi Desa
 Route::get('/profil-desa', [ProfilDesaController::class, 'showUserView'])->name('profil-desa');
-Route::get('/informasi-publik', [InformasiPublikController::class, 'showUserView'])->name('informasi');
+
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
 
 // Pengaduan
@@ -51,22 +51,11 @@ Route::post('/panduan/{id}/view', [PanduanController::class, 'addView'])->name('
 Route::get('/comments/{panduan_id}', [CommentController::class, 'showcomment']);
 Route::post('/panduan/comment', [CommentController::class, 'store'])->name('comments.store');
 
-// 📰 Berita (User)
+//  Berita (User)
 Route::get('/berita', [UserBeritaController::class, 'index'])->name('user.berita.index');
 Route::get('/berita/{slug}', [UserBeritaController::class, 'show'])->name('user.berita.show');
 
-/*
-|--------------------------------------------------------------------------
-| Berita Desa (USER)
-|--------------------------------------------------------------------------
-*/
 
-Route::get('/berita', [BeritaController::class, 'userIndex'])
-    ->name('berita.index');
-
-Route::get('/berita/{slug}', [BeritaController::class, 'show'])
-    ->name('berita.show');
- 
 // Halaman tambahan
 Route::view('/infografis', 'user.infografis')->name('infografis');
 Route::view('/wisata', 'user.wisata')->name('wisata');
@@ -93,23 +82,23 @@ Route::post('/bantuan/rating', [BantuanRatingController::class, 'store'])->name(
 // USER - BANTUAN - CHAT
 // =============================
 
-// 👉 Halaman Bantuan (pilih kategori)
+// ðŸ‘‰ Halaman Bantuan (pilih kategori)
 Route::get('/bantuan', [BantuanController::class, 'index'])
     ->name('user.bantuan');
 
-// 👉 Mulai chat (buat session)
+// ðŸ‘‰ Mulai chat (buat session)
 Route::post('/bantuan/start', [BantuanChatController::class, 'start'])
     ->name('bantuan.start');
 
-// 👉 Halaman chat
+// ðŸ‘‰ Halaman chat
 Route::get('/bantuan/chat', [BantuanChatController::class, 'chatView'])
     ->name('bantuan.chat.view');
 
-// 👉 Kirim pesan (AJAX)
+// ðŸ‘‰ Kirim pesan (AJAX)
 Route::post('/bantuan/chat/send', [BantuanChatController::class, 'send'])
     ->name('bantuan.chat.send');
 
-// 👉 Ambil pesan (AJAX polling)
+// ðŸ‘‰ Ambil pesan (AJAX polling)
 Route::get('/bantuan/chat/fetch', [BantuanChatController::class, 'fetch'])
     ->name('bantuan.chat.fetch');
 
@@ -122,7 +111,7 @@ Route::post('/bantuan/chat/end', [BantuanChatController::class, 'end'])
 | BANTUAN - RATING (USER)
 |--------------------------------------------------------------------------
 */
-// 👉 Tampilkan halaman rating (SETELAH chat selesai)
+// ðŸ‘‰ Tampilkan halaman rating (SETELAH chat selesai)
 Route::get('/bantuan/rating/{session_id}', 
     [BantuanRatingController::class, 'create']
 )->name('bantuan.rating.create');
@@ -141,15 +130,15 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
 
-        // 📌 Halaman daftar percakapan bantuan (group by session_id)
+        // ðŸ“Œ Halaman daftar percakapan bantuan (group by session_id)
         Route::get('/bantuan', [AdminBantuanController::class, 'index'])
             ->name('bantuan.index');
 
-        // 📌 Detail chat berdasarkan session_id
+        // ðŸ“Œ Detail chat berdasarkan session_id
         Route::get('/bantuan/chat/{session_id}', [AdminBantuanController::class, 'showChat'])
             ->name('bantuan.chat');
 
-        // 📌 Admin membalas pesan
+        // ðŸ“Œ Admin membalas pesan
         Route::post('/bantuan/chat/reply', [AdminBantuanController::class, 'reply'])
             ->name('bantuan.reply');
     });
@@ -167,7 +156,7 @@ Route::middleware('auth')
         // Profil Desa
         Route::resource('profil-desa', ProfilDesaController::class)->except(['show']);
         // Informasi Publik
-        Route::resource('informasi-publik', InformasiPublikController::class);
+       
         // Organisasi
         Route::resource('organisasi', OrganisasiController::class);
         // Pengaduan
@@ -175,7 +164,7 @@ Route::middleware('auth')
         // Panduan
         Route::resource('panduan', PanduanController::class);
 
-        // 📰 Berita (Admin CRUD)
+        // ðŸ“° Berita (Admin CRUD)
         Route::get('/berita', [AdminBeritaController::class, 'index'])->name('berita.index');
         Route::get('/berita/create', [AdminBeritaController::class, 'create'])->name('berita.create');
         Route::post('/berita', [AdminBeritaController::class, 'store'])->name('berita.store');
@@ -255,5 +244,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::get('/dashboard', function () {
+    return redirect()->route('admin.profil-desa.index');
+})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

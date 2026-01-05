@@ -38,8 +38,9 @@
                 <div class="p-8 bg-white rounded-3xl border-l-8 border-emerald-500 shadow-sm">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Sejarah Singkat</h3>
                     <p class="text-gray-600 italic">
-                        "Didirikan pada abad ke-18 oleh para leluhur yang terpikat oleh kesuburan tanah dan melimpahnya sumber daya alam, Bomo berevolusi dari pemukiman agraris menjadi desa yang dinamis namun tetap memegang teguh akar budayanya."
-                    </p>
+    "{{ $profildesa?->sejarah_singkat ?? 'Sejarah singkat belum tersedia.' }}"
+</p>
+
                 </div>
             </div>
             <div class="relative" data-aos="fade-left">
