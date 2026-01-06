@@ -12,12 +12,16 @@ class ProfilDesa extends Model
     protected $table = 'profil_desas'; // opsional kalau nama tabel standar
 
     protected $fillable = [
-        'nama_desa',
-        'visi',
-        'misi',
-        'kepala_desa',
-        'lokasi',
-        'deskripsi',
-        'sejarah_singkat', // ← WAJIB ADA DI SINI
-    ];
+    'nama_desa',
+    'tentang_kami',
+    'sejarah_singkat',
+    'visi',
+    'misi',
+    'total_penduduk',
+    'luas_wilayah',
+    'potensi_utama',
+    'judul_data',
+    'deskripsi_data',
+];
+
 }

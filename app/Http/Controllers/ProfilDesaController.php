@@ -7,69 +7,79 @@ use App\Models\ProfilDesa;
 
 class ProfilDesaController extends Controller
 {
+    // ADMIN: halaman index profil desa (1 record saja)
     public function index()
     {
         $profildesa = ProfilDesa::first();
         return view('admin.profil-desa', compact('profildesa'));
     }
 
+    // USER: halaman publik profil desa
     public function showUserView()
     {
         $profildesa = ProfilDesa::first();
         return view('user.profil-desa', compact('profildesa'));
     }
 
-    /**
-     * OPTIONAL: kalau kamu tidak mau create sama sekali, arahkan ke edit saja
-     */
+    // ADMIN: form tambah
     public function create()
     {
-        $profildesa = ProfilDesa::first();
-
-        // kalau belum ada record, bikin 1 record kosong agar bisa diedit
-        if (!$profildesa) {
-            $profildesa = ProfilDesa::create([
-                'nama_desa' => '-',
-                'visi' => '-',
-                'misi' => '-',
-                'kepala_desa' => '-',
-                'lokasi' => '-',
-                'deskripsi' => '-',
-                'sejarah_singkat' => '',
-            ]);
-        }
-
-        return redirect()->route('admin.profil-desa.edit', $profildesa->id);
+        return view('admin.profil-desa.create');
     }
 
-    /**
-     * OPTIONAL: store tidak dipakai lagi (biar aman tetap redirect)
-     */
+    // ADMIN: simpan
     public function store(Request $request)
     {
-        return redirect()->route('admin.profil-desa.index');
+        ProfilDesa::create($request->validate([
+            'nama_desa' => 'required|string|max:255',
+
+            'tentang_kami' => 'nullable|string',
+            'sejarah_singkat' => 'nullable|string',
+            'visi' => 'nullable|string',
+            'misi' => 'nullable|string',
+
+            'total_penduduk' => 'nullable|string|max:50',
+            'luas_wilayah' => 'nullable|string|max:50',
+            'potensi_utama' => 'nullable|string|max:50',
+
+            'judul_data' => 'nullable|string|max:255',
+            'deskripsi_data' => 'nullable|string',
+            'label_tombol_data' => 'nullable|string|max:100',
+        ]));
+
+        return redirect()->route('admin.profil-desa.index')
+            ->with('success', 'Profil desa berhasil ditambahkan!');
     }
 
+    // ADMIN: form edit
     public function edit($id)
     {
         $profilDesa = ProfilDesa::findOrFail($id);
         return view('admin.profil-desa.edit', compact('profilDesa'));
     }
 
-    /**
-     * ✅ HANYA UPDATE SEJARAH
-     */
+    // ADMIN: update
     public function update(Request $request, $id)
     {
         $profilDesa = ProfilDesa::findOrFail($id);
 
-        $data = $request->validate([
-            'sejarah_singkat' => 'required|string',
-        ]);
+        $profilDesa->update($request->validate([
+            'nama_desa' => 'required|string|max:255',
 
-        $profilDesa->update($data);
+            'tentang_kami' => 'nullable|string',
+            'sejarah_singkat' => 'nullable|string',
+            'visi' => 'nullable|string',
+            'misi' => 'nullable|string',
+
+            'total_penduduk' => 'nullable|string|max:50',
+            'luas_wilayah' => 'nullable|string|max:50',
+            'potensi_utama' => 'nullable|string|max:50',
+
+            'judul_data' => 'nullable|string|max:255',
+            'deskripsi_data' => 'nullable|string',
+        ]));
 
         return redirect()->route('admin.profil-desa.index')
-            ->with('success', 'Sejarah singkat berhasil diperbarui!');
+            ->with('success', 'Profil desa diperbarui!');
     }
 }

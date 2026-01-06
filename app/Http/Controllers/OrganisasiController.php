@@ -21,19 +21,14 @@ class OrganisasiController extends Controller
         ];
     }
 
-    /**
-     * Menampilkan halaman organisasi di sisi USER (Halaman Depan)
-     * Tambahkan method ini agar tidak error "Call to undefined method"
-     */
+   
     public function showUserView()
     {
         $organisasi = Organisasi::all();
         return view('user.organisasi', compact('organisasi'));
     }
 
-    /**
-     * Dashboard Admin
-     */
+    
     public function index() {
         $data = Organisasi::all();
         return view('admin.organisasi', compact('data'));
