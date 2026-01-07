@@ -90,31 +90,73 @@
 
 <section class="container mx-auto px-8 py-20 bg-white overflow-hidden">
     <div class="text-center mb-14" data-aos="fade-up">
-        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">📰 Berita & Pengumuman Terbaru</h2>
-        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Informasi terkini dari kantor desa, event budaya, dan kemajuan pembangunan.</p>
+        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">
+            📰 Berita & Pengumuman Terbaru
+        </h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">
+            Informasi terkini dari kantor desa, event budaya, dan kemajuan pembangunan.
+        </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        @foreach(range(1, 3) as $i)
-        <div class="bg-gray-50 rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition duration-500 group overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $i * 200 }}">
-            <div class="relative overflow-hidden">
-                 <img src="https://picsum.photos/400/250?random={{ $i + 10 }}" alt="Gambar Berita {{ $i }}" class="w-full h-52 object-cover transition duration-700 transform group-hover:scale-110">
-                 <div class="absolute bottom-0 right-0 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-tl-lg">
-                    {{ date('d F Y', strtotime('-' . $i . ' days')) }}
-                 </div>
-            </div>
-            <div class="p-6">
-                <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-emerald-700 transition">{{ 'Judul Berita Progresif ' . $i }}</h3>
-                <p class="text-gray-600 mb-4 line-clamp-3 text-base">Ringkasan singkat yang ditulis dengan baik, menyoroti dampak dan relevansi berita bagi masyarakat Desa Bomo.</p>
-                <a href="#" class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
-                    Baca Selengkapnya
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                </a>
-            </div>
+    @if(isset($beritas) && $beritas->count())
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            @foreach($beritas as $i => $berita)
+                <div
+                    class="bg-gray-50 rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition duration-500 group overflow-hidden transform hover:-translate-y-2"
+                    data-aos="fade-up"
+                    data-aos-delay="{{ ($i + 1) * 200 }}"
+                >
+                    {{-- GAMBAR --}}
+                    <div class="relative overflow-hidden">
+                        @if(!empty($berita->gambar))
+                            <img
+                                src="{{ asset('storage/' . $berita->gambar) }}"
+                                alt="{{ $berita->judul }}"
+                                class="w-full h-52 object-cover transition duration-700 transform group-hover:scale-110"
+                            >
+                        @else
+                            <div class="w-full h-52 bg-gray-200 flex items-center justify-center text-gray-400 text-sm">
+                                Tidak ada gambar
+                            </div>
+                        @endif
+
+                        <div class="absolute bottom-0 right-0 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-tl-lg">
+                            {{ $berita->created_at->format('d F Y') }}
+                        </div>
+                    </div>
+
+                    {{-- KONTEN --}}
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-emerald-700 transition">
+                            {{ $berita->judul }}
+                        </h3>
+
+                        <p class="text-gray-600 mb-4 line-clamp-3 text-base">
+                            {{ Str::limit($berita->konten, 120) }}
+                        </p>
+
+                        <a href="{{ route('user.berita.show', $berita->slug) }}"
+                           class="inline-flex items-center text-emerald-600 font-bold hover:text-emerald-700 transition">
+                            Baca Selengkapnya
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
+    @else
+        <div class="text-center text-gray-500 py-20">
+            <p class="text-lg font-semibold">Belum ada berita yang dipublikasikan.</p>
+        </div>
+    @endif
 </section>
+
+
 
 <section class="container mx-auto px-8 py-20 bg-gradient-to-t from-gray-100 to-gray-50 text-center overflow-hidden">
     <div class="text-center mb-12" data-aos="fade-up">
@@ -146,46 +188,45 @@
     </div>
 </section>
 
-<section class="container mx-auto px-8 py-20 bg-white text-center overflow-hidden">
+<section class="container mx-auto px-8 py-20 bg-gray-100 text-center overflow-hidden">
+
+    <!-- Header -->
     <div class="text-center mb-12" data-aos="fade-up">
-        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">📊 Transparansi Anggaran Desa</h2>
-        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Komitmen kami untuk pengelolaan dana yang terbuka dan akuntabel.</p>
-    </div>
-
-<!-- Struktur Organisasi -->
-<section class="py-24 bg-white relative overflow-hidden" data-aos="fade-up">
-    <div class="container mx-auto px-6 text-center relative z-10">
-        
-        <h2 class="text-4xl font-bold text-green-700 mb-4 uppercase">Struktur Organisasi</h2>
-        <div class="w-20 h-1.5 bg-green-500 mx-auto rounded-full mb-10"></div>
-
-        <p class="text-gray-600 max-w-3xl mx-auto mb-16 text-lg leading-relaxed italic">
-            "Tata kelola pemerintahan Desa Bomo dijalankan oleh perangkat desa yang berdedikasi tinggi, transparan, dan akuntabel dalam setiap fungsi pelayanan publik."
+        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">
+            👨‍💼 Aparatur Pemerintah Desa Bomo
+        </h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">
+            Struktur kepemimpinan yang profesional dan berintegritas melayani masyarakat.
         </p>
-
-        <div class="flex flex-col items-center space-y-12 mb-16">
-            @foreach($organisasi->where('jabatan', 'Kepala Desa')->take(1) as $kades)
-                <div class="transform hover:scale-105 transition-transform duration-300">
-                    @include('user.infografis._card_organisasi', ['anggota' => $kades, 'size' => 'medium'])
-                </div>
-            @endforeach
+    </div>
+    <!-- Preview 3 Orang -->
+  <div class="flex flex-col items-center space-y-12 mb-16">
+    @forelse($organisasiPreview->where('jabatan', 'Kepala Desa')->take(1) as $kades)
+        <div class="transform hover:scale-105 transition-transform duration-300">
+            @include('user.infografis._card_organisasi', ['anggota' => $kades, 'size' => 'medium'])
         </div>
-
-        <a href="{{ route('organisasi') }}" 
-           class="inline-flex items-center px-10 py-4 border-2 border-green-600 text-green-700 font-bold rounded-2xl hover:bg-green-600 hover:text-white transition-all duration-300 group">
-            <span>Lihat Struktur Selengkapnya</span>
-            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+    @empty
+        <div class="text-center text-gray-400 italic">
+            Struktur organisasi belum tersedia
+        </div>
+    @endforelse
+    </div>
+    <!-- Button Lihat Selengkapnya -->
+    <div class="text-center" data-aos="fade-up">
+        <a href="{{ route('organisasi') }}"
+           class="inline-flex items-center gap-2 px-8 py-3
+                  bg-emerald-600 text-white font-semibold rounded-full
+                  hover:bg-emerald-700 transition shadow-lg">
+            Lihat Selengkapnya
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 5l7 7-7 7"/>
             </svg>
         </a>
     </div>
-</section>
 
-<section class="container mx-auto px-8 py-20 bg-gray-100 text-center overflow-hidden">
-    <div class="text-center mb-12" data-aos="fade-up">
-        <h2 class="text-4xl font-extrabold text-gray-800 inline-block border-b-4 border-yellow-600 pb-2">👨‍💼 Aparatur Pemerintah Desa Bomo</h2>
-        <p class="text-lg text-gray-600 mt-4 max-w-xl mx-auto">Struktur kepemimpinan yang profesional dan berintegritas melayani masyarakat.</p>
-    </div>
+</section>
 
 
 @endsection

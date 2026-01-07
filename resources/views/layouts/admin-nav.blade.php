@@ -9,7 +9,7 @@
 
             {{-- BRAND --}}
             <div class="flex items-center gap-3">
-                <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
                     <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center overflow-hidden">
                         <img src="{{ asset('assets/banyuwangi.png') }}" class="w-7 h-7 object-contain" alt="Logo">
                     </div>
@@ -126,11 +126,10 @@
         {{-- SECONDARY NAV (TABS) --}}
         @php
             $tabs = [
-                ['label' => 'Dashboard', 'route' => 'home', 'active' => request()->routeIs('home')],
+                ['label' => 'Dashboard', 'route' => 'dashboard', 'active' => request()->routeIs('dashboard')],
                 ['label' => 'Profil Desa', 'route' => 'admin.profil-desa.index', 'active' => request()->routeIs('admin.profil-desa.*')],
                 ['label' => 'Berita', 'route' => 'admin.berita.index', 'active' => request()->routeIs('admin.berita.*')],
                 ['label' => 'Struktur Organisasi', 'route' => 'admin.organisasi.index', 'active' => request()->routeIs('admin.organisasi.*')],
-                ['label' => 'Pengaduan', 'route' => 'admin.pengaduan.index', 'active' => request()->routeIs('admin.pengaduan.*')],
                 ['label' => 'Panduan', 'route' => 'admin.panduan.index', 'active' => request()->routeIs('admin.panduan.*')],
                 ['label' => 'Bantuan', 'route' => 'admin.bantuan.index', 'active' => request()->routeIs('admin.bantuan.*')],
             ];

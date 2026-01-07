@@ -31,4 +31,7 @@ class Berita extends Model
             }
         });
     }
+
+   
+
 }

@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pengaduan;
-use App\Models\Organisasi; // Tambahkan import model Organisasi
+use App\Models\Organisasi;
+use App\Models\Berita;
 
 class HomeController extends Controller
 {
-    // Halaman dashboard admin
+    // Dashboard admin
     public function adminview()
     {
         $pengaduan = Pengaduan::latest()->paginate(10);
         return view('admin.home', compact('pengaduan'));
     }
 
-    // Halaman beranda user
+    // Beranda user
     public function userview()
     {
-        $pengaduan = Pengaduan::latest()->paginate(10);
-        // Ambil data organisasi untuk ditampilkan di home
-        $organisasi = Organisasi::all(); 
-        
-        return view('user.home', compact('pengaduan', 'organisasi'));
+        return view('user.home', [
+            'pengaduan'          => Pengaduan::latest()->paginate(10),
+            'organisasiPreview' => Organisasi::latest()->take(3)->get(),
+            'beritas'           => Berita::latest()->take(3)->get(),
+        ]);
     }
 }

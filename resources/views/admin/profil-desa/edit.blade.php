@@ -39,28 +39,71 @@
                         </p>
                     </div>
 
-                    <form method="POST" action="{{ route('admin.profil-desa.update', $profilDesa->id) }}">
-                        @csrf
-                        @method('PUT')
+                   <form method="POST" action="{{ route('admin.profil-desa.update', $profilDesa->id) }}" class="space-y-5">
+    @csrf
+    @method('PUT')
 
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            Teks Sejarah
-                        </label>
-                        <textarea name="sejarah_singkat" rows="6"
-                            class="w-full rounded-xl border-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
-                            placeholder="Contoh: Didirikan pada abad ke-18 oleh para leluhur...">{{ old('sejarah_singkat', $profilDesa->sejarah_singkat) }}</textarea>
+    <div>
+        <label class="text-sm font-semibold">Nama Desa</label>
+        <input name="nama_desa" value="{{ old('nama_desa', $profilDesa->nama_desa) }}"
+               class="w-full rounded-xl border-gray-200" required>
+    </div>
 
-                        <div class="mt-6 flex items-center justify-end gap-3">
-                            <a href="{{ route('admin.profil-desa.index') }}"
-                               class="px-5 py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50">
-                                Batal
-                            </a>
-                            <button type="submit"
-                                class="px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow-sm">
-                                Simpan Perubahan
-                            </button>
-                        </div>
-                    </form>
+    <div>
+        <label class="text-sm font-semibold">Tentang Kami (Ringkasan)</label>
+        <textarea name="tentang_kami" rows="4" class="w-full rounded-xl border-gray-200">{{ old('tentang_kami', $profilDesa->tentang_kami) }}</textarea>
+    </div>
+
+    <div>
+        <label class="text-sm font-semibold">Sejarah Singkat</label>
+        <textarea name="sejarah_singkat" rows="4" class="w-full rounded-xl border-gray-200">{{ old('sejarah_singkat', $profilDesa->sejarah_singkat) }}</textarea>
+    </div>
+
+    <div>
+        <label class="text-sm font-semibold">Visi</label>
+        <textarea name="visi" rows="3" class="w-full rounded-xl border-gray-200">{{ old('visi', $profilDesa->visi) }}</textarea>
+    </div>
+
+    <div>
+        <label class="text-sm font-semibold">Misi</label>
+        <textarea name="misi" rows="5" class="w-full rounded-xl border-gray-200">{{ old('misi', $profilDesa->misi) }}</textarea>
+        <p class="text-xs text-gray-500 mt-1">Pisahkan misi per baris (ENTER) agar mudah ditampilkan sebagai list.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+            <label class="text-sm font-semibold">Total Penduduk</label>
+            <input name="total_penduduk" value="{{ old('total_penduduk', $profilDesa->total_penduduk) }}"
+                   class="w-full rounded-xl border-gray-200" placeholder="5.000+">
+        </div>
+        <div>
+            <label class="text-sm font-semibold">Luas Wilayah</label>
+            <input name="luas_wilayah" value="{{ old('luas_wilayah', $profilDesa->luas_wilayah) }}"
+                   class="w-full rounded-xl border-gray-200" placeholder="15 km²">
+        </div>
+        <div>
+            <label class="text-sm font-semibold">Potensi Utama</label>
+            <input name="potensi_utama" value="{{ old('potensi_utama', $profilDesa->potensi_utama) }}"
+                   class="w-full rounded-xl border-gray-200" placeholder="3 Sektor">
+        </div>
+    </div>
+
+    <div>
+        <label class="text-sm font-semibold">Judul Section Data</label>
+        <input name="judul_data" value="{{ old('judul_data', $profilDesa->judul_data) }}"
+               class="w-full rounded-xl border-gray-200" placeholder="Transparansi Melalui Data">
+    </div>
+
+    <div>
+        <label class="text-sm font-semibold">Deskripsi Section Data</label>
+        <textarea name="deskripsi_data" rows="4" class="w-full rounded-xl border-gray-200">{{ old('deskripsi_data', $profilDesa->deskripsi_data) }}</textarea>
+    </div>
+
+  
+
+    <button class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold">Simpan</button>
+</form>
+
 
                 </div>
             </div>

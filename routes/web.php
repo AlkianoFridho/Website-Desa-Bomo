@@ -18,6 +18,7 @@ use App\Http\Controllers\CommentController;
 // ðŸ”¹ Berita Controllers
 use App\Http\Controllers\User\BeritaController as UserBeritaController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::get('/completion', [OnboardingController::class, 'showCompletion'])->name
 Route::get('/profil-desa', [ProfilDesaController::class, 'showUserView'])->name('profil-desa');
 
 Route::get('/organisasi', [OrganisasiController::class, 'showUserView'])->name('organisasi');
+Route::get('/struktur-organisasi', [OrganisasiController::class, 'index'])
+    ->name('struktur-organisasi');
+
+
+
 
 // Pengaduan
 Route::get('/pengaduan', [PengaduanController::class, 'showUserView'])->name('pengaduan');
@@ -153,6 +159,7 @@ Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+       Route::resource('dashboard', DashboardController::class)->except(['index']);
         // Profil Desa
         Route::resource('profil-desa', ProfilDesaController::class)->except(['show']);
         // Informasi Publik

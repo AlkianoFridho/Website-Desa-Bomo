@@ -12,14 +12,16 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <!-- Dashboard -->
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    
+                  
 
                     @auth
                         @if (auth()->user()->role === 'admin')
                             {{-- ADMIN MENU --}}
+                              <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                             </x-nav-link>
+
                             <x-nav-link :href="route('admin.profil-desa.index')"
                                 :active="request()->routeIs('admin.profil-desa.*')">
                                 {{ __('Profil Desa') }}
@@ -36,10 +38,7 @@
                                 {{ __('Struktur Organisasi') }}
                             </x-nav-link>
 
-                            <x-nav-link :href="route('admin.pengaduan.index')"
-                                :active="request()->routeIs('admin.pengaduan.*')">
-                                {{ __('Pengaduan') }}
-                            </x-nav-link>
+                            
 
                             <x-nav-link :href="route('admin.panduan.index')"
                                 :active="request()->routeIs('admin.panduan.*')">
