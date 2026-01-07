@@ -9,12 +9,13 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
+    
+    
     overflow-x: hidden; /* Hapus scroll horizontal */
     background-color: #f3f4f6;
     color: #155724;
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Navbar */
@@ -43,4 +44,36 @@ body {
 /* Footer */
 .footer {
     @apply bg-green-600 text-white text-center py-4 mt-8;
+}
+
+/* Mode Invert Warna */
+.invert-filter {
+    filter: invert(100%) hue-rotate(180deg);
+}
+
+/* Teks Besar */
+.big-text {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.6;
+}
+
+/* Kontras Tinggi */
+.high-contrast {
+    filter: contrast(180%);
+}
+
+/* FORCE bottom nav jadi 4 kotak */
+.mobile-bottomnav-grid{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: .5rem !important;
+}
+
+.mobile-bottomnav-item{
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
 }

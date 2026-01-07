@@ -33,8 +33,9 @@
                 <span class="text-emerald-600 font-black uppercase tracking-[0.3em] text-sm mb-4 block">Tentang Kami</span>
                 <h2 class="text-4xl font-bold text-gray-900 mb-6">Warisan Budaya & Keindahan Alam</h2>
                 <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                    Desa Bomo, permata tersembunyi di Kecamatan Rogojampi, Kabupaten Banyuwangi. Desa ini bukan sekadar wilayah administratif, melainkan sebuah harmoni antara sejarah panjang dan keasrian alam yang tetap terjaga hingga saat ini.
-                </p>
+    {{ $profildesa?->tentang_kami ?? 'Deskripsi tentang kami belum tersedia.' }}
+</p>
+
                 <div class="p-8 bg-white rounded-3xl border-l-8 border-emerald-500 shadow-sm">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Sejarah Singkat</h3>
                     <p class="text-gray-600 italic">
@@ -72,8 +73,9 @@
                             <h3 class="text-2xl font-bold italic">Visi Kami</h3>
                         </div>
                         <p class="text-xl text-emerald-100 leading-relaxed font-light flex-grow">
-                            "Mewujudkan Desa Bomo yang mandiri, sejahtera, dan berdaya saing berbasis potensi lokal yang berkelanjutan."
-                        </p>
+    "{{ $profildesa?->visi ?? 'Visi belum tersedia.' }}"
+</p>
+
                     </div>
 
                     {{-- Misi (Dengan Garis Pembatas Kiri di Layar Besar) --}}
@@ -84,21 +86,23 @@
                             </div>
                             <h3 class="text-2xl font-bold italic">Misi Kami</h3>
                         </div>
-                        <ul class="space-y-4">
+                        
                             @php
-                                $misi = [
-                                    "Optimalisasi Sumber Daya Alam untuk ekonomi kreatif.",
-                                    "Transformasi digital pada seluruh lini pelayanan publik.",
-                                    "Pelestarian ekosistem lingkungan dan pembangunan hijau."
-                                ];
-                            @endphp
-                            @foreach($misi as $item)
-                            <li class="flex items-start gap-3 text-emerald-100/90">
-                                <span class="text-emerald-400 mt-1">✦</span>
-                                <span>{{ $item }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
+  $misiItems = $profildesa?->misi
+    ? preg_split("/\r\n|\n|\r/", trim($profildesa->misi))
+    : [];
+@endphp
+
+<ul class="space-y-4">
+  @forelse($misiItems as $item)
+    <li class="flex items-start gap-3 text-emerald-100/90">
+      <span class="text-emerald-400 mt-1">✦</span>
+      <span>{{ $item }}</span>
+    </li>
+  @empty
+    <li class="text-emerald-100/80">Misi belum tersedia.</li>
+  @endforelse
+</ul>
                     </div>
                 </div>
             </div>
@@ -110,7 +114,7 @@
                 <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                 </div>
-                <h4 class="text-4xl font-black text-gray-900 mb-2">5.000+</h4>
+                <h4 class="text-4xl font-black text-gray-900 mb-2">{{ $profildesa?->total_penduduk ?? '—' }}</h4>
                 <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Total Penduduk</p>
             </div>
 
@@ -118,7 +122,7 @@
                 <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
                 </div>
-                <h4 class="text-4xl font-black text-gray-900 mb-2">15 km²</h4>
+                <h4 class="text-4xl font-black text-gray-900 mb-2">{{ $profildesa?->luas_wilayah ?? '—' }}</h4>
                 <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Luas Wilayah</p>
             </div>
 
@@ -126,7 +130,7 @@
                 <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 </div>
-                <h4 class="text-4xl font-black text-gray-900 mb-2">3 Sektor</h4>
+                <h4 class="text-4xl font-black text-gray-900 mb-2">{{ $profildesa?->potensi_utama ?? '—' }}</h4>
                 <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Potensi Utama</p>
             </div>
         </div>
@@ -139,10 +143,12 @@
 
                 <div class="relative z-10">
                     <span class="text-emerald-600 font-black uppercase tracking-[0.4em] text-xs mb-4 block">Data & Statistik</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">Transparansi Melalui Data</h2>
+<h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6">
+  {{ $profildesa?->judul_data ?? 'Transparansi Melalui Data' }}
+</h2>
                     <p class="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto mb-10">
-                        Kami percaya bahwa data adalah kunci transparansi. Jelajahi statistik kependudukan, realisasi anggaran, hingga potensi unggulan Desa Bomo yang kami sajikan secara visual dan interaktif.
-                    </p>
+  {{ $profildesa?->deskripsi_data ?? 'Deskripsi data belum tersedia.' }}
+</p>
 
                     <a href="{{ route('infografis') }}" 
                        class="group inline-flex items-center px-10 py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 transition-all duration-300 shadow-[0_10px_20px_rgba(16,185,129,0.2)] hover:shadow-[0_15px_30px_rgba(16,185,129,0.3)] hover:-translate-y-1">
